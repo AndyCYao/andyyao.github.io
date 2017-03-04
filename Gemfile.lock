@@ -196,6 +196,7 @@ PLATFORMS
 
 DEPENDENCIES
   github-pages
+  json
 
 BUNDLED WITH
    1.13.6

@@ -1,0 +1,140 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Welcome to Andy's homepage! by AndyCYao</title>
+
+    <link rel="stylesheet" href="/assets/css/style.css?v=618b49018a089762e18f1edaa3db2ce8b8a6e805">
+    <meta name="viewport" content="width=device-width">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Welcome to Andy's homepage!</h1>
+        <p>I use this blog to store the notes I have collected throughout my education in computer science. Feel free to browse and comment</p>
+
+        
+          <p class="view"><a href="http://github.com/AndyCYao/blog">View the Project on GitHub <small></small></a></p>
+        
+
+        
+
+        
+      </header>
+      <section>
+
+      <h3 id="cmpt-354-database-management-winter-2017">CMPT 354 Database Management Winter 2017</h3>
+
+<h2 id="er-diagrams-and-relational-diagram">ER Diagrams and Relational Diagram</h2>
+<p><em>ER Diagrams</em> are for concepts, it is used for abstract grouping of entities and relationships
+<em>Relational Diagram</em> is for logical modeling, tends to be drawn when the ER Diagram is already fleshed out.</p>
+
+<h2 id="entity">Entity</h2>
+<div class="highlighter-rouge"><pre class="highlight"><code>Weak entity are those that depends on a foreign entity to identiy itself. AKA child entity that depends on the parent entity
+
+Strong entity, those that have their own primary key
+</code></pre>
+</div>
+
+<h2 id="covering-constraint-and-overlap-constraint">Covering Constraint and Overlap Constraint</h2>
+<div class="highlighter-rouge"><pre class="highlight"><code>Pertains to the ISA relation.
+*Covering Constraint* - Does every Employee have to be a contractor, or temp?
+*Overlap Constraint* - Can contractor or temp overlap? ie. Can the employee be both
+</code></pre>
+</div>
+
+<h2 id="keys">Keys</h2>
+<div class="highlighter-rouge"><pre class="highlight"><code>- Super key are set of candidate keys.
+- Candidate keys are column or columns that uniquely identifies the entries in an entity
+- Primary key is the minimal candidate key. 
+</code></pre>
+</div>
+
+<h2 id="database">Database</h2>
+<div class="highlighter-rouge"><pre class="highlight"><code>- This is a physical storage of data, we will be installing relational databases, which is a part of DBMS (database management system)
+
+- The purpose of a DB is to faciliate access/ storing data. key things to note is to protect data from concurrent users, crash recoveries, etc. 
+
+-a schema is a way to describe data
+</code></pre>
+</div>
+
+<h2 id="sql">SQL</h2>
+<div class="highlighter-rouge"><pre class="highlight"><code>- we have DDL, data definition language, which are the CREATE, DROP, DELETE, keywords
+- DML, data manipulation language, which includes
+keywords such as SELECT, UPDATE, DELETE etc. 
+</code></pre>
+</div>
+
+<h2 id="acid">ACID</h2>
+<div class="highlighter-rouge"><pre class="highlight"><code>- Databases must maintain 'ACID'
+- Atomic - groups of transaction must all pass or all fail, if fail, a log is used to unroll the changes. 
+- Consistent - After each transaction, the DB is in consistent state.
+- Isolation - Concurrency control to allow multi user
+- Durability - the database must not be corruptible and lose information
+</code></pre>
+</div>
+
+<p>’’’
+INSERT INTO tableName(a, b, c, d)
+VALUES (1,2,3,4)</p>
+
+<p>CREATE VIEW ViewName 
+(SELECT …)</p>
+
+<p>DROP VIEW</p>
+
+<p>LIKE (case insensitive)</p>
+
+<p>UNION - joins two select queries, note fields have to be the same</p>
+
+<p>INTERSECT -</p>
+
+<p>EXCEPT</p>
+
+<p>Relational Algebra’s Set division can be translated to SQL like so</p>
+
+<p>e.g.  Find sailors who’ve reserved all boats
+SELECT  S.sname
+FROM  Sailors S
+WHERE  NOT EXISTS 
+            ((SELECT  B.bid
+                 FROM  Boats B)
+             EXCEPT
+             (SELECT  R.bid
+               FROM  Reserves R
+               WHERE  R.sid=S.sid))</p>
+
+<p>Find Entity that have only 1 attribute
+e.g. Find the snames of suppliers who supply only red parts.
+Select S.sid from Suppliers S
+where ‘Red’ = ALL (select Parts.color 
+		from Catalog, Parts
+		where Catalog.sid = S.sid and Parts.pid = Catalog.pid )</p>
+
+<p>’’’</p>
+
+<p>a = Any {a,3} 	True
+a  = All  {a,3} 	False
+a = Any 	{}	False
+a = All	{}	True</p>
+
+
+      </section>
+      <footer>
+        
+        <p>This project is maintained by <a href="http://github.com/AndyCYao">AndyCYao</a></p>
+        
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="/assets/js/scale.fix.js"></script>
+
+
+  
+  </body>
+</html>

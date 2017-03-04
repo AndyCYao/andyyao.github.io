@@ -1,4 +1,32 @@
-theme: jekyll-theme-dinky
+theme: jekyll-theme-minimal
 title: Welcome to Andy's homepage!
 description: I use this blog to store the notes I have collected throughout my education in computer science. Feel free to browse and comment
-email: andyyao3@gmail.com
+author: 
+  name: Andy Yao
+  email: andyyao3@gmail.com
+  github: AndyCYao  
+production_url : http://andycyao.github.io/blog
+BASE_PATH : http://andycyao.github.io/blog
+
+
+#defaults:
+#  - scope:
+#      path: ""
+#      type: courses
+#    values:
+#      layout: page
+
+
+#collection:
+#  courses:
+#    output: true
+#    title: COURSES
+#    permalink: /courses/:path/
+
+
+# excludes the below files from official production
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - LICENSE
+  - README.md
