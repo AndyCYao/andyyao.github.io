@@ -6,13 +6,15 @@ author:
   email: andyyao3@gmail.com
   github: AndyCYao  
 production_url : http://andycyao.github.io/blog
-BASE_PATH : http://andycyao.github.io/blog
+BASE_PATH : /blog
 
 markdown: kramdown
 
 collections:
   courses:
     output: true
+
+
 
 # excludes the below files from official production
 exclude:
