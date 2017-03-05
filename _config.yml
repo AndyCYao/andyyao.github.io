@@ -8,21 +8,11 @@ author:
 production_url : http://andycyao.github.io/blog
 BASE_PATH : http://andycyao.github.io/blog
 
+markdown: kramdown
 
-#defaults:
-#  - scope:
-#      path: ""
-#      type: courses
-#    values:
-#      layout: page
-
-
-#collection:
-#  courses:
-#    output: true
-#    title: COURSES
-#    permalink: /courses/:path/
-
+collections:
+  courses:
+    output: true
 
 # excludes the below files from official production
 exclude:

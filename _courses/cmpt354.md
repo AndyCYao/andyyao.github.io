@@ -1,3 +1,10 @@
+---
+layout: default
+title: "Database Management"
+code: "CMPT 354"
+semester: "Winter 2017"
+
+---
 ### CMPT 354 Database Management Winter 2017
 
 ## ER Diagrams and Relational Diagram 
@@ -38,7 +45,7 @@
 	- Isolation - Concurrency control to allow multi user
 	- Durability - the database must not be corruptible and lose information
 
-'''
+'''sql
 INSERT INTO tableName(a, b, c, d)
 VALUES (1,2,3,4)
 

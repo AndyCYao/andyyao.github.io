@@ -1,5 +1,6 @@
 ---
 layout: default
+title: "First Post"
 ---
 
-#Hi, this is my first post
+# Hi, this is my first post
