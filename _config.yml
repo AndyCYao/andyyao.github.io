@@ -5,7 +5,7 @@ author:
   name: Andy Yao
   email: andyyao3@gmail.com
   github: AndyCYao  
-production_url : http://andycyao.github.io/blog
+#production_url : http://andycyao.github.io/blog
 baseurl : /blog
 
 markdown: kramdown
