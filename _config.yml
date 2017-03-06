@@ -6,7 +6,7 @@ author:
   email: andyyao3@gmail.com
   github: AndyCYao  
 production_url : http://andycyao.github.io/blog
-BASE_PATH : /blog
+baseurl : /blog
 
 markdown: kramdown
 
