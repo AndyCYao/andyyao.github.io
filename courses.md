@@ -1,5 +1,5 @@
 ---
-title: Courses I have taken so far
+title: Course Notes
 layout: default
 
 ---
