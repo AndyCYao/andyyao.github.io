@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>Welcome to Andy's homepage! by AndyCYao</title>
 
-    <link rel="stylesheet" href="/blog/assets/css/style.css?v=8457c05431dd6430095a4df7fdb30b930c2ac190">
+    <link rel="stylesheet" href="/blog/assets/css/style.css?v=a0dc140f6835d27867c06d1e1418f20111b4c411">
     <meta name="viewport" content="width=device-width">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -21,38 +21,81 @@
           <p class="view"><a href="http://github.com/AndyCYao/blog">View the Project on GitHub <small></small></a></p>
         
 
+        <!-- Added by AY -->
+
+        <p class="view"><a href="/about">About</a></p>
+        <p class="view"><a href="/courses">Courses</a></p>
+        <!-- Added by AY -->
+
+
         
 
         
       </header>
       <section>
       
-      <h3 id="macm-201-discrete-math-ii-winter-2017">MACM 201 Discrete Math II Winter 2017</h3>
+      <h2 id="macm-201-discrete-math-ii-winter-2017">MACM 201 Discrete Math II Winter 2017</h2>
 
-<h2 id="euler-trail-and-euler-circuits">Euler Trail and Euler Circuits</h2>
+<h3 id="what-is-a-graph">What is a graph</h3>
+<p>graph is a collection of vertices, V, and edges E.</p>
+
+<h3 id="traversal-terms">Traversal terms</h3>
+<ul>
+  <li>Cycle is a closed Path, a Path has no repeat vertices</li>
+  <li>Circuit is a closed Trail, a Trail has no repeat edges</li>
+  <li>Walk is the most general case, no restrictions.</li>
+</ul>
+
+<h3 id="euler-trail-and-euler-circuits">Euler Trail and Euler Circuits</h3>
 <p>if G is a connected graph. G has a <em>Euler circuit</em> if the circuit traverses every edge of the graph exactly once.</p>
 
-<p>it is a <em>Euler trail</em> if it’s open and traverse every edge once.</p>
+<p>it’s a <em>Euler trail</em> if it’s open and traverse every edge once.</p>
 
-<h2 id="theorem----if-gv-e-is-an-undirected-graph-or-multi-graph--then-sum-of-all-the-degrees-of-the-vertices-are-2e">Theorem -  If G=(V, E) is an undirected graph or multi graph , then sum of all the degrees of the vertices are 2|E|</h2>
+<h3 id="theorem----if-gv-e-is-an-undirected-graph-or-multi-graph--then-sum-of-all-the-degrees-of-the-vertices-are-2e">Theorem -  If G=(V, E) is an undirected graph or multi graph , then sum of all the degrees of the vertices are 2|E|</h3>
 
 <p>Proof - 
-For each edge [a, b] in grpah G, the edge countributes a count of 1 to deg(a) and deg(b) respectively.</p>
+For each edge [a, b] in graph G, the edge countributes a count of 1 to deg(a) and deg(b) respectively.</p>
 
-<p>consequently, for each edge, it contributes 2 to the sum of total degrees.</p>
+<p>consequently, for each edge, it contributes 2 to the sum of total degrees. 
+Thus 2|E| accounts for deg(v), for all v in vertices.</p>
 
-<table>
-  <tbody>
-    <tr>
-      <td>Thus 2</td>
-      <td>E</td>
-      <td>accounts for deg(v), for all v in vertices.</td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 id="regular-graph">Regular Graph</h2>
+<h3 id="regular-graph">Regular Graph</h3>
 <p>This is a graph where each vertex shares the <em>same</em> degrees. if deg(v) = k for all vertices v, then the graph is call k-regular.</p>
+
+<h3 id="isomorphic">Isomorphic,</h3>
+<p>If two graphs G1, and G2 are isomorphic, then there is a function f that is bijective, and f maps an edge E1 to E2.</p>
+
+<h2 id="graph-proofs">Graph Proofs</h2>
+
+<h3 id="proof-for-all-x---y-walks-in-a-graph-there-exists-a-x--y-path">Proof for all x - y walks in a graph, there exists a x -y path</h3>
+<ol>
+  <li>
+    <p>Define a w to be a minimal walk from x - y, so it is also the shortest.</p>
+  </li>
+  <li>
+    <p>theres two cases for w . A.) either w has a repeated vertex, or B.) it does not.</p>
+  </li>
+  <li>
+    <p>for case</p>
+    <ul>
+      <li>A. Since there is a repeated vertex, call v1. this means this walk looks something like this . x - a - b - c -v1 - d -v1 - y. This means we can remove occurences of v1 so that only one v1 remains. This new walk w1 is now a path.</li>
+      <li>B. we are done, as by definition it is also a path.</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="proof-if-graph-g-has-a-total-number-of-vertices-v-and-total-number-of-edges-e-and-g-is-loop-free-undirected--prove-that-2e--v2---v">Proof if graph G has a total number of vertices v. and total number of edges e. and G is loop free, undirected . prove that 2e &lt;= v^2 - v</h3>
+<p>the key is to note that the maximum edges a graph can have is given by the complete graph of vertices v. ie. (v, 2) edges.</p>
+
+<p>then its a matter of rearranging the formula of (v,2) to get v(v-1)/2</p>
+
+<h3 id="general-notes-on-graph-proofs">General notes on graph proofs</h3>
+<p>We should remember the property Sum of all degrees = 2 * total edges of a graph.</p>
+
+<p>a k+1 regular graph would also have the properties of a k regular graph. 
+	so if k regular graph has a k walk, the k+1 graph would also have it.</p>
+
+<p>in a induction proof, when we have establish a base case, an induction hypothesis, and we are proofing for n+1, it may be sufficient to just draw a graph n abstractly, namely, we dont care about whether its bipartite, complete, or whatever.</p>
 
 
       </section>

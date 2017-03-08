@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>Welcome to Andy's homepage! by AndyCYao</title>
 
-    <link rel="stylesheet" href="/blog/assets/css/style.css?v=8457c05431dd6430095a4df7fdb30b930c2ac190">
+    <link rel="stylesheet" href="/blog/assets/css/style.css?v=a0dc140f6835d27867c06d1e1418f20111b4c411">
     <meta name="viewport" content="width=device-width">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -21,85 +21,95 @@
           <p class="view"><a href="http://github.com/AndyCYao/blog">View the Project on GitHub <small></small></a></p>
         
 
+        <!-- Added by AY -->
+
+        <p class="view"><a href="/about">About</a></p>
+        <p class="view"><a href="/courses">Courses</a></p>
+        <!-- Added by AY -->
+
+
         
 
         
       </header>
       <section>
       
-      <h3 id="cmpt-354-database-management-winter-2017">CMPT 354 Database Management Winter 2017</h3>
+      <h2 id="cmpt-354-database-management-winter-2017">CMPT 354 Database Management Winter 2017</h2>
 
-<h2 id="er-diagrams-and-relational-diagram">ER Diagrams and Relational Diagram</h2>
+<h3 id="er-diagrams-and-relational-diagram">ER Diagrams and Relational Diagram</h3>
 <p><em>ER Diagrams</em> are for concepts, it is used for abstract grouping of entities and relationships
 <em>Relational Diagram</em> is for logical modeling, tends to be drawn when the ER Diagram is already fleshed out.</p>
 
-<h2 id="entity">Entity</h2>
-<div class="highlighter-rouge"><pre class="highlight"><code>Weak entity are those that depends on a foreign entity to identiy itself. AKA child entity that depends on the parent entity
+<h3 id="entity">Entity</h3>
+<p>Weak entity are those that depends on a foreign entity to identiy itself. AKA child entity that depends on the parent entity</p>
 
-Strong entity, those that have their own primary key
+<p>Strong entity, those that have their own primary key</p>
+
+<h3 id="covering-constraint-and-overlap-constraint">Covering Constraint and Overlap Constraint</h3>
+<p>Pertains to the ISA relation.
+<em>Covering Constraint</em> - Does every Employee have to be a contractor, or temp?
+<em>Overlap Constraint</em> - Can contractor or temp overlap? ie. Can the employee be both</p>
+
+<h3 id="keys">Keys</h3>
+<ul>
+  <li>Super key are set of candidate keys.</li>
+  <li>Candidate keys are column or columns that uniquely identifies the entries in an entity</li>
+  <li>Primary key is the minimal candidate key.</li>
+</ul>
+
+<h3 id="database">Database</h3>
+<ul>
+  <li>
+    <p>This is a physical storage of data, we will be installing relational databases, which is a part of DBMS (database management system)</p>
+  </li>
+  <li>
+    <p>The purpose of a DB is to faciliate access/ storing data. key things to note is to protect data from concurrent users, crash recoveries, etc.</p>
+  </li>
+</ul>
+
+<p>-a schema is a way to describe data</p>
+
+<h3 id="sql">SQL</h3>
+<ul>
+  <li>we have DDL, data definition language, which are the CREATE, DROP, DELETE, keywords</li>
+  <li>DML, data manipulation language, which includes
+  keywords such as SELECT, UPDATE, DELETE etc.</li>
+</ul>
+
+<h3 id="acid">ACID</h3>
+<ul>
+  <li>Databases must maintain ‘ACID’</li>
+  <li>Atomic - groups of transaction must all pass or all fail, if fail, a log is used to unroll the changes.</li>
+  <li>Consistent - After each transaction, the DB is in consistent state.</li>
+  <li>Isolation - Concurrency control to allow multi user</li>
+  <li>Durability - the database must not be corruptible and lose information</li>
+</ul>
+
+<p>’'’sql</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>INSERT INTO tableName(a, b, c, d)
+VALUES (1,2,3,4)
+
+CREATE VIEW ViewName 
+(SELECT ...)
+
+DROP VIEW
+
+LIKE (case insensitive)
+
+UNION - joins two select queries, note fields have to be the same
+
+INTERSECT - 
+
+EXCEPT
 </code></pre>
 </div>
-
-<h2 id="covering-constraint-and-overlap-constraint">Covering Constraint and Overlap Constraint</h2>
-<div class="highlighter-rouge"><pre class="highlight"><code>Pertains to the ISA relation.
-*Covering Constraint* - Does every Employee have to be a contractor, or temp?
-*Overlap Constraint* - Can contractor or temp overlap? ie. Can the employee be both
-</code></pre>
-</div>
-
-<h2 id="keys">Keys</h2>
-<div class="highlighter-rouge"><pre class="highlight"><code>- Super key are set of candidate keys.
-- Candidate keys are column or columns that uniquely identifies the entries in an entity
-- Primary key is the minimal candidate key. 
-</code></pre>
-</div>
-
-<h2 id="database">Database</h2>
-<div class="highlighter-rouge"><pre class="highlight"><code>- This is a physical storage of data, we will be installing relational databases, which is a part of DBMS (database management system)
-
-- The purpose of a DB is to faciliate access/ storing data. key things to note is to protect data from concurrent users, crash recoveries, etc. 
-
--a schema is a way to describe data
-</code></pre>
-</div>
-
-<h2 id="sql">SQL</h2>
-<div class="highlighter-rouge"><pre class="highlight"><code>- we have DDL, data definition language, which are the CREATE, DROP, DELETE, keywords
-- DML, data manipulation language, which includes
-keywords such as SELECT, UPDATE, DELETE etc. 
-</code></pre>
-</div>
-
-<h2 id="acid">ACID</h2>
-<div class="highlighter-rouge"><pre class="highlight"><code>- Databases must maintain 'ACID'
-- Atomic - groups of transaction must all pass or all fail, if fail, a log is used to unroll the changes. 
-- Consistent - After each transaction, the DB is in consistent state.
-- Isolation - Concurrency control to allow multi user
-- Durability - the database must not be corruptible and lose information
-</code></pre>
-</div>
-
-<p>’'’sql
-INSERT INTO tableName(a, b, c, d)
-VALUES (1,2,3,4)</p>
-
-<p>CREATE VIEW ViewName 
-(SELECT …)</p>
-
-<p>DROP VIEW</p>
-
-<p>LIKE (case insensitive)</p>
-
-<p>UNION - joins two select queries, note fields have to be the same</p>
-
-<p>INTERSECT -</p>
-
-<p>EXCEPT</p>
 
 <p>Relational Algebra’s Set division can be translated to SQL like so</p>
 
-<p>e.g.  Find sailors who’ve reserved all boats
-SELECT  S.sname
+<p>e.g.  Find sailors who’ve reserved all boats</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>SELECT  S.sname
 FROM  Sailors S
 WHERE  NOT EXISTS 
             ((SELECT  B.bid
@@ -107,21 +117,29 @@ WHERE  NOT EXISTS
              EXCEPT
              (SELECT  R.bid
                FROM  Reserves R
-               WHERE  R.sid=S.sid))</p>
+               WHERE  R.sid=S.sid))
+</code></pre>
+</div>
 
 <p>Find Entity that have only 1 attribute
-e.g. Find the snames of suppliers who supply only red parts.
-Select S.sid from Suppliers S
+e.g. Find the snames of suppliers who supply only red parts.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Select S.sid from Suppliers S
 where ‘Red’ = ALL (select Parts.color 
 		from Catalog, Parts
-		where Catalog.sid = S.sid and Parts.pid = Catalog.pid )</p>
+		where Catalog.sid = S.sid and Parts.pid = Catalog.pid )
+</code></pre>
+</div>
 
 <p>’’’</p>
 
-<p>a = Any {a,3} 	True
-a  = All  {a,3} 	False
-a = Any 	{}	False
-a = All	{}	True</p>
+<p>a = Any {a,3} 	True</p>
+
+<p>a  = All  {a,3} 	False</p>
+
+<p>a = Any 	{}	False</p>
+
+<p>a = All	{}	True</p>
 
 
       </section>

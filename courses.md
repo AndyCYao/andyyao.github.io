@@ -1,7 +1,7 @@
 ---
 title: Courses I have taken so far
 layout: default
-permalink: /courses/
+
 ---
 
 <h1>Here are the notes</h1>
