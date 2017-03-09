@@ -66,14 +66,14 @@ Pertains to the ISA relation.
 Relational Algebra's Set division can be translated to SQL like so
 
 e.g.  Find sailors who’ve reserved all boats
-	
+
 	SELECT  S.sname
 	FROM  Sailors S
 	WHERE  NOT EXISTS 
-	            ((SELECT  B.bid
-	                 FROM  Boats B)
-	             EXCEPT
-	             (SELECT  R.bid
+	       	((SELECT  B.bid
+	            FROM  Boats B)
+	            EXCEPT
+	            (SELECT  R.bid
 	               FROM  Reserves R
 	               WHERE  R.sid=S.sid))
 

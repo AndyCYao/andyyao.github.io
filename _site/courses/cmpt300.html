@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Welcome to Andy's homepage! by AndyCYao</title>
+
+    <link rel="stylesheet" href="/blog/assets/css/style.css?v=f5cae721a3e1b9efd18b1391be73d87d0e6b3269">
+    <meta name="viewport" content="width=device-width">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Welcome to Andy's homepage!</h1>
+        <p>I use this blog to store the notes I have collected throughout my education in computer science. Feel free to browse and comment</p>
+
+        
+          <p class="view"><a href="http://github.com/AndyCYao/blog">View the Project on GitHub <small></small></a></p>
+        
+
+        <!-- Added by AY 
+        In future, need to fix the /blog hardcoded reference to a relative reference, but currently could not figure out they keyword for the base url-->
+        
+        <p class="view"><a href="/blog/about.html ">About</a></p>
+        
+        <p class="view"><a href="/blog/courses.html ">Course Notes</a></p>
+        
+        <p class="view"><a href="/blog/ "></a></p>
+        
+        <p class="view"><a href="/blog/assets/css/style.css "></a></p>
+        
+
+        <!-- Added by AY -->
+
+
+        
+
+        
+      </header>
+      <section>
+      
+      <h2 id="cmpt-300-operating-systems-winter-2017">CMPT 300 Operating Systems Winter 2017</h2>
+
+<h3 id="memory-management">Memory Management</h3>
+<p>there is a distinction between virtual memory , and physical memory.
+Processes do not access physical memory directly, they access virtual memory, and there is a memory management unit MMU that connects the virtual address to physical addresses.</p>
+
+<p>There are two approach to connect virtual and physical memory, Page Base memory management, and segment based memory management. Page base is the dominant form of memory management and what we study.</p>
+
+<h4 id="mmu-memory-management-unit">MMU memory management unit</h4>
+<p>every CPU has a MMU, and the MMU is responsible for translating the virtual memory and physical address.
+it is also responsible for reporting faults, such as illegal access etc.</p>
+
+<p>a MMU also has a translation lookaside buffer, which is a cache that stores some information for faster look up.</p>
+
+<h3 id="registers">Registers</h3>
+<p>The hardware has designated registers for address translation. Which are pointers to the page table, it has information about the base, the limit size, and number of segments etc.</p>
+
+<h3 id="page-base-memory-management">Page base memory management</h3>
+<p>A page table is a component of page base memory managment , it’s like a map that connects the virtual memory to the physical memory. The table stores the virtual page number, and goes through an offset, to create the physical frame number.</p>
+
+<p>When there is a new virtual memory being accessed, there is nothing in the page table. The page table arranges for a free physical frame to be used.</p>
+
+<p>The page table is created per every process. the OS has to perform context switch to switch out the different page tables in the register.</p>
+
+
+
+      </section>
+      <footer>
+        
+        <p>This project is maintained by <a href="http://github.com/AndyCYao">AndyCYao</a></p>
+        
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="/blog/assets/js/scale.fix.js"></script>
+
+
+  
+  </body>
+</html>
