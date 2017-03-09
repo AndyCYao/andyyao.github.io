@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>Welcome to Andy's homepage! by AndyCYao</title>
 
-    <link rel="stylesheet" href="/blog/assets/css/style.css?v=f5cae721a3e1b9efd18b1391be73d87d0e6b3269">
+    <link rel="stylesheet" href="/blog/assets/css/style.css?v=dbc8769cdd5b87c2593d320c521549a2e2f4e4a4">
     <meta name="viewport" content="width=device-width">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -15,7 +15,7 @@
     <div class="wrapper">
       <header>
         <h1>Welcome to Andy's homepage!</h1>
-        <p>I use this blog to store the notes I have collected throughout my education in computer science. Feel free to browse and comment</p>
+        <p>I use this blog to store the notes I have collected throughout my time learning computer science. Feel free to browse and comment</p>
 
         
           <p class="view"><a href="http://github.com/AndyCYao/blog">View the Project on GitHub <small></small></a></p>
@@ -43,6 +43,38 @@
       <section>
       
       <h2 id="macm-201-discrete-math-ii-winter-2017">MACM 201 Discrete Math II Winter 2017</h2>
+
+<h3 id="find-unique-solution-to-a-given-recurrence">Find unique solution to a given recurrence</h3>
+<p>Given $$ a_{n+1} - 1.5a_n = 0$$</p>
+
+<p>Rearrange equation so $$ a_{n+1} = 1.5a_n$$</p>
+
+<p>then we can see that $$ a_{n+2} = 1.5a_{n+1} = 1.5 * 1.5 * a_{n}$$</p>
+
+<p>so the unique solution is $$ a_{n} = 1.5^n * a_0 $$</p>
+
+<h3 id="solve-a-recurrence-using-characteristic-polynomial">Solve a recurrence using characteristic polynomial</h3>
+<p>Given an equation such as $$ a_n = 2a_{n-1} + 3a_{n} \quad a_0 = 1 \quad a_1 = 2 $$</p>
+
+<p>Substitute $$ a_n = cr^n $$</p>
+
+<p>so the equation becomes $$ cr^n = 2cr^{n-1} + 3cr^{n-2} $$</p>
+
+<p>the key part is to divide both sides by $$ cr^{n - lowest exponent} $$</p>
+
+<p>in this case its 2, it becomes $$ r^2 - 2r - 3 = 0 $$</p>
+
+<p>move terms to one side rearrange and find the root $$ (r+1)(r-3) = 0 $$</p>
+
+<p>with r = -1 and r = 3, general equation for second order homogenous solution is $$ a_n=A3^n+B(-1)^n $$</p>
+
+<p>solve for A and B by using initial information $$ a_1 = 1 \quad a_0 = 0 $$</p>
+
+<p>we get 
+<script type="math/tex">A = 3/4 \quad B=1/4</script></p>
+
+<p>The solution is thus 
+<script type="math/tex">a_n = 3/4*3^n + 1/4*(-1)^{n}</script></p>
 
 <h3 id="what-is-a-graph">What is a graph</h3>
 <p>graph is a collection of vertices, V, and edges E.</p>
@@ -116,6 +148,7 @@ Thus 2|E| accounts for deg(v), for all v in vertices.</p>
     </div>
     <script src="/blog/assets/js/scale.fix.js"></script>
 
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 
   
   </body>

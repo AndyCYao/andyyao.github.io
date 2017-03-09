@@ -45,7 +45,7 @@ Pertains to the ISA relation.
 - Isolation - Concurrency control to allow multi user
 - Durability - the database must not be corruptible and lose information
 
-'''sql
+~~~ sql
 	
 	INSERT INTO tableName(a, b, c, d)
 	VALUES (1,2,3,4)
@@ -62,31 +62,32 @@ Pertains to the ISA relation.
 	INTERSECT - 
 
 	EXCEPT
+~~~
 
 Relational Algebra's Set division can be translated to SQL like so
 
 e.g.  Find sailors who’ve reserved all boats
-
-	SELECT  S.sname
-	FROM  Sailors S
-	WHERE  NOT EXISTS 
-	       	((SELECT  B.bid
-	            FROM  Boats B)
-	            EXCEPT
+~~~ sql
+SELECT  S.sname
+FROM  Sailors S
+WHERE  NOT EXISTS 
+	    ((SELECT  B.bid
+	      FROM  Boats B)
+	        EXCEPT
 	            (SELECT  R.bid
 	               FROM  Reserves R
 	               WHERE  R.sid=S.sid))
+~~~
 
 Find Entity that have only 1 attribute
 e.g. Find the snames of suppliers who supply only red parts.
 
+~~~ sql
 	Select S.sid from Suppliers S
 	where ‘Red’ = ALL (select Parts.color 
 			from Catalog, Parts
 			where Catalog.sid = S.sid and Parts.pid = Catalog.pid )
-
-
-'''
+~~~
 
 a = Any {a,3} 	True
 

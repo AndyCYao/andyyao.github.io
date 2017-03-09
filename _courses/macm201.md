@@ -6,6 +6,39 @@ semester: "Winter 2017"
 ---
 ## MACM 201 Discrete Math II Winter 2017
 
+
+### Find unique solution to a given recurrence
+Given \$$ a_{n+1} - 1.5a_n = 0$$
+
+Rearrange equation so \$$ a_{n+1} = 1.5a_n$$
+
+then we can see that \$$ a_{n+2} = 1.5a_{n+1} = 1.5 * 1.5 * a_{n}$$
+
+so the unique solution is \$$ a_{n} = 1.5^n * a_0 $$
+
+### Solve a recurrence using characteristic polynomial
+Given an equation such as \$$ a_n = 2a_{n-1} + 3a_{n} \quad a_0 = 1 \quad a_1 = 2 $$
+
+Substitute \$$ a_n = cr^n $$
+
+so the equation becomes \$$ cr^n = 2cr^{n-1} + 3cr^{n-2} $$
+
+the key part is to divide both sides by \$$ cr^{n - lowest exponent} $$ 
+
+in this case its 2, it becomes \$$ r^2 - 2r - 3 = 0 $$ 
+
+move terms to one side rearrange and find the root \$$ (r+1)(r-3) = 0 $$
+
+with r = -1 and r = 3, general equation for second order homogenous solution is \$$ a_n=A3^n+B(-1)^n $$
+
+solve for A and B by using initial information \$$ a_1 = 1 \quad a_0 = 0 $$ 
+
+we get 
+$$ A = 3/4 \quad B=1/4 $$
+
+The solution is thus 
+$$ a_n = 3/4*3^n + 1/4*(-1)^{n} $$
+
 ### What is a graph
 graph is a collection of vertices, V, and edges E. 
 
