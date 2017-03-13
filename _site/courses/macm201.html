@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>Welcome to Andy's homepage! by AndyCYao</title>
 
-    <link rel="stylesheet" href="/blog/assets/css/style.css?v=dbc8769cdd5b87c2593d320c521549a2e2f4e4a4">
+    <link rel="stylesheet" href="/blog/assets/css/style.css?v=da53750ba98df009b742f0824fc0f6ebe02c020f">
     <meta name="viewport" content="width=device-width">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -76,6 +76,32 @@
 <p>The solution is thus 
 <script type="math/tex">a_n = 3/4*3^n + 1/4*(-1)^{n}</script></p>
 
+<h3 id="table-of-reference-for-particular-solutions-in-recurrence">Table of reference for particular solutions in recurrence</h3>
+<p>g(n) of <script type="math/tex">n^t</script> is <script type="math/tex">\quad A_on^t + A_1n^{t-1} + A_2n^{t-2} + ... + A_0</script></p>
+
+<p>g(n) of <script type="math/tex">r^n</script> is <script type="math/tex">\quad Ar^n</script></p>
+
+<p>g(n) of <script type="math/tex">n^tr^n</script> is <script type="math/tex">\quad r^n(A_tn^t + A_{t-1}n^{t-1} + A_{t-2}n^{t-2} + ... + A_1n^1 + A_0)</script></p>
+
+<h3 id="solve-a-nonhomogenous-equation">Solve a nonhomogenous equation</h3>
+<ol>
+  <li>Determine the recurrence solution, like 
+$$ a_n = 3a_{n-1} + 3^{n-1} $$</li>
+  <li>find the general solution for the homogenous portion 
+$$ a_n^h = Ar_1^n + Br_2^n $$ where A B are constants that solves the equation.</li>
+  <li>Find the particular solution <script type="math/tex">a_n^p</script> using textbook table, note if found to be symmetric with <script type="math/tex">a_n^h</script> you need to introduce a <script type="math/tex">n</script> to break the symmetry. 
+$$ a_n^p = C2^n + Dn^23^n $$ where C D are constants to solve for the particular solution</li>
+  <li>the solution is now in the form of 
+$$ a_n = a_n^h + a_n^p = Ar_1^n + Br_2^n + C2^n + Dn^2(3^n) $$</li>
+  <li>Use coefficient copmarision to solve for C and D in <script type="math/tex">a_n^p</script> by plugging <script type="math/tex">a_n^p</script> into the recurrence soluation at 1.</li>
+  <li>Once we found C, D , we can solve for A, B by setting up 4. <script type="math/tex">a_n</script> with the values from 5.</li>
+</ol>
+
+<h3 id="extended-binomial-theorem">Extended Binomial Theorem</h3>
+<div class="highlighter-rouge"><pre class="highlight"><code>Formula for (fraction, n) and (negative, n) ### Coefficient Extraction
+</code></pre>
+</div>
+
 <h3 id="what-is-a-graph">What is a graph</h3>
 <p>graph is a collection of vertices, V, and edges E.</p>
 
@@ -91,6 +117,10 @@
 
 <p>it’s a <em>Euler trail</em> if it’s open and traverse every edge once.</p>
 
+<p><script type="math/tex">G=(V,E)</script> be a connected graph or multigraph, G has a Eulerian circuit <em>IFF</em> every vertex of G has even degree.</p>
+
+<p><em>Corollary</em> <script type="math/tex">G=(V,E)</script> be a connected graph or multigraph. G has an Eulerian Trail <em>IFF</em> G has exactly two vertices of odd degree.</p>
+
 <h3 id="theorem----if-gv-e-is-an-undirected-graph-or-multi-graph--then-sum-of-all-the-degrees-of-the-vertices-are-2e">Theorem -  If G=(V, E) is an undirected graph or multi graph , then sum of all the degrees of the vertices are 2|E|</h3>
 
 <p>Proof - 
@@ -102,9 +132,42 @@ Thus 2|E| accounts for deg(v), for all v in vertices.</p>
 <h3 id="regular-graph">Regular Graph</h3>
 <p>This is a graph where each vertex shares the <em>same</em> degrees. if deg(v) = k for all vertices v, then the graph is call k-regular.</p>
 
+<p>if G is a k-regular graph, then 
+<script type="math/tex">|E| = k|V|/2</script></p>
 <h3 id="isomorphic">Isomorphic,</h3>
 <p>If two graphs G1, and G2 are isomorphic, then there is a function f that is bijective, and f maps an edge E1 to E2.</p>
 
+<p>one can transform G1 into G2 by relabelling the vertice of G1 with the labels of vertices of G2 (AKA preserving adjacencies)</p>
+
+<h4 id="tips-on-identifying-graph-isomorphism">Tips on identifying graph isomorphism</h4>
+<ol>
+  <li>If you think G and H are isomorphic, then you would need to show there is a bijective mapping between vertices of G and vertices of H that preserves the edge.</li>
+  <li>If not isomorphic, you need to show they are different, including:
+    <ul>
+      <li>number of vertices</li>
+      <li>number of edges</li>
+      <li>degrees of distribution</li>
+      <li>cycles length</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="planar-graphs">Planar Graphs</h3>
+<p>Planar graph is a graph that can be drawn without intersecting edges. 
+Each planar graph have planar embedding 
+which are different variations of planar graph</p>
+
+<h4 id="k_5andk_33-are-the-first-non-planar-graphs"><script type="math/tex">K_5\,and\,K_{3,3}</script> are the first non planar graphs</h4>
+<p>Kuratowsk Theorem says a graph is a planar IFF if it does not contain a subgraph of subdivision <script type="math/tex">K_5 \, and \, K_{3,3}</script></p>
+
+<h3 id="hypercube">Hypercube</h3>
+<p>two binary sequences of w and w’ have distance 1 if they differ in a single position.</p>
+
+<p>Hypercubes have strings as vertices, and edges if two strings differ by distance 1</p>
+<h4 id="distance">Distance</h4>
+<p>The distance between two vertices is the <em>shortest path</em> between the two</p>
+<h4 id="hamming-distance">Hamming Distance</h4>
+<p>two binary sequence w, and w’ of length n, the hamming distance is the number of positions in the string where they are different.</p>
 <h2 id="graph-proofs">Graph Proofs</h2>
 
 <h3 id="proof-for-all-x---y-walks-in-a-graph-there-exists-a-x--y-path">Proof for all x - y walks in a graph, there exists a x -y path</h3>
@@ -124,7 +187,8 @@ Thus 2|E| accounts for deg(v), for all v in vertices.</p>
   </li>
 </ol>
 
-<h3 id="proof-if-graph-g-has-a-total-number-of-vertices-v-and-total-number-of-edges-e-and-g-is-loop-free-undirected--prove-that-2e--v2---v">Proof if graph G has a total number of vertices v. and total number of edges e. and G is loop free, undirected . prove that 2e &lt;= v^2 - v</h3>
+<h3 id="proof-if-graph-g-has-a-total-number-of-vertices-v-and-total-number-of-edges-e-and-g-is-loop-free-undirected--prove-that-2e--v2---v">Proof if graph G has a total number of vertices v. and total number of edges e. and G is loop free, undirected . prove that <script type="math/tex">% <![CDATA[
+2e <= v^2 - v %]]></script></h3>
 <p>the key is to note that the maximum edges a graph can have is given by the complete graph of vertices v. ie. (v, 2) edges.</p>
 
 <p>then its a matter of rearranging the formula of (v,2) to get v(v-1)/2</p>

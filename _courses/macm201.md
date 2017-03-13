@@ -39,6 +39,29 @@ $$ A = 3/4 \quad B=1/4 $$
 The solution is thus 
 $$ a_n = 3/4*3^n + 1/4*(-1)^{n} $$
 
+### Table of reference for particular solutions in recurrence 
+g(n) of $$ n^t $$ is $$\quad A_on^t + A_1n^{t-1} + A_2n^{t-2} + ... + A_0 $$
+
+g(n) of $$ r^n $$ is $$\quad Ar^n $$
+
+g(n) of $$ n^tr^n $$ is $$\quad r^n(A_tn^t + A_{t-1}n^{t-1} + A_{t-2}n^{t-2} + ... + A_1n^1 + A_0) $$
+
+### Solve a nonhomogenous equation
+1. Determine the recurrence solution, like 
+\$$ a_n = 3a_{n-1} + 3^{n-1} $$
+2. find the general solution for the homogenous portion 
+\$$ a_n^h = Ar_1^n + Br_2^n $$ where A B are constants that solves the equation.
+3. Find the particular solution $$ a_n^p $$ using textbook table, note if found to be symmetric with $$ a_n^h $$ you need to introduce a $$ n $$ to break the symmetry. 
+\$$ a_n^p = C2^n + Dn^23^n $$ where C D are constants to solve for the particular solution 
+4. the solution is now in the form of 
+\$$ a_n = a_n^h + a_n^p = Ar_1^n + Br_2^n + C2^n + Dn^2(3^n) $$ 
+5. Use coefficient copmarision to solve for C and D in $$ a_n^p $$ by plugging $$ a_n^p $$ into the recurrence soluation at 1.
+6. Once we found C, D , we can solve for A, B by setting up 4. $$ a_n $$ with the values from 5. 
+
+### Extended Binomial Theorem
+	Formula for (fraction, n) and (negative, n)
+### Coefficient Extraction
+
 ### What is a graph
 graph is a collection of vertices, V, and edges E. 
 
@@ -53,6 +76,10 @@ if G is a connected graph. G has a *Euler circuit* if the circuit traverses ever
 
 it's a *Euler trail* if it's open and traverse every edge once. 
 
+$$ G=(V,E) $$ be a connected graph or multigraph, G has a Eulerian circuit *IFF* every vertex of G has even degree. 
+
+*Corollary* $$ G=(V,E) $$ be a connected graph or multigraph. G has an Eulerian Trail *IFF* G has exactly two vertices of odd degree.
+
 ### Theorem -  If G=(V, E) is an undirected graph or multi graph , then sum of all the degrees of the vertices are 2|E|
 
 Proof - 
@@ -64,9 +91,37 @@ Thus 2|E| accounts for deg(v), for all v in vertices.
 ### Regular Graph
 This is a graph where each vertex shares the *same* degrees. if deg(v) = k for all vertices v, then the graph is call k-regular.
 
+if G is a k-regular graph, then 
+$$ |E| = k|V|/2 $$
 ### Isomorphic,
 If two graphs G1, and G2 are isomorphic, then there is a function f that is bijective, and f maps an edge E1 to E2. 
 
+one can transform G1 into G2 by relabelling the vertice of G1 with the labels of vertices of G2 (AKA preserving adjacencies)
+
+#### Tips on identifying graph isomorphism
+1. If you think G and H are isomorphic, then you would need to show there is a bijective mapping between vertices of G and vertices of H that preserves the edge. 
+2. If not isomorphic, you need to show they are different, including:
+- number of vertices
+- number of edges 
+- degrees of distribution
+- cycles length
+
+### Planar Graphs 
+Planar graph is a graph that can be drawn without intersecting edges. 
+Each planar graph have planar embedding 
+which are different variations of planar graph
+
+#### $$ K_5\,and\,K_{3,3} $$ are the first non planar graphs 
+Kuratowsk Theorem says a graph is a planar IFF if it does not contain a subgraph of subdivision $$ K_5 \, and \, K_{3,3} $$
+
+### Hypercube
+two binary sequences of w and w' have distance 1 if they differ in a single position. 
+
+Hypercubes have strings as vertices, and edges if two strings differ by distance 1
+#### Distance 
+The distance between two vertices is the *shortest path* between the two
+#### Hamming Distance 
+two binary sequence w, and w' of length n, the hamming distance is the number of positions in the string where they are different. 
 ## Graph Proofs
 
 ### Proof for all x - y walks in a graph, there exists a x -y path
@@ -78,7 +133,7 @@ If two graphs G1, and G2 are isomorphic, then there is a function f that is bije
   - A. Since there is a repeated vertex, call v1. this means this walk looks something like this . x - a - b - c -v1 - d -v1 - y. This means we can remove occurences of v1 so that only one v1 remains. This new walk w1 is now a path. 
   - B. we are done, as by definition it is also a path.
 
-### Proof if graph G has a total number of vertices v. and total number of edges e. and G is loop free, undirected . prove that 2e <= v^2 - v
+### Proof if graph G has a total number of vertices v. and total number of edges e. and G is loop free, undirected . prove that $$ 2e <= v^2 - v $$
 the key is to note that the maximum edges a graph can have is given by the complete graph of vertices v. ie. (v, 2) edges.
 
 then its a matter of rearranging the formula of (v,2) to get v(v-1)/2
