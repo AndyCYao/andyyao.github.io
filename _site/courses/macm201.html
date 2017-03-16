@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>Welcome to Andy's homepage! by AndyCYao</title>
 
-    <link rel="stylesheet" href="/blog/assets/css/style.css?v=da53750ba98df009b742f0824fc0f6ebe02c020f">
+    <link rel="stylesheet" href="/blog/assets/css/style.css?v=21e917046af01d4716be726e1c28af849181ab62">
     <meta name="viewport" content="width=device-width">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -93,14 +93,28 @@ $$ a_n^h = Ar_1^n + Br_2^n $$ where A B are constants that solves the equation.<
 $$ a_n^p = C2^n + Dn^23^n $$ where C D are constants to solve for the particular solution</li>
   <li>the solution is now in the form of 
 $$ a_n = a_n^h + a_n^p = Ar_1^n + Br_2^n + C2^n + Dn^2(3^n) $$</li>
-  <li>Use coefficient copmarision to solve for C and D in <script type="math/tex">a_n^p</script> by plugging <script type="math/tex">a_n^p</script> into the recurrence soluation at 1.</li>
+  <li>Use coefficient comparision to solve for C and D in <script type="math/tex">a_n^p</script> by plugging <script type="math/tex">a_n^p</script> into the recurrence soluation at 1.</li>
   <li>Once we found C, D , we can solve for A, B by setting up 4. <script type="math/tex">a_n</script> with the values from 5.</li>
 </ol>
 
 <h3 id="extended-binomial-theorem">Extended Binomial Theorem</h3>
-<div class="highlighter-rouge"><pre class="highlight"><code>Formula for (fraction, n) and (negative, n) ### Coefficient Extraction
-</code></pre>
-</div>
+<p>Formula for (fraction, n) and (negative, n) follows the form</p>
+
+<script type="math/tex; mode=display">(n,r) = (n(n-1)(n-2)...(n-r+1))/r!</script>
+
+<p>for (negative, n) this simplies to</p>
+
+<p><script type="math/tex">(-1)^r(n+r-1, r)</script></p>
+<h3 id="coefficient-extraction">Coefficient Extraction</h3>
+<p>Coefficient extraction is used to solve recurrence relations, and find combinatoric sums , amongsts other things.</p>
+
+<p>There are several rules we can follow</p>
+<ol>
+  <li>Sum Rule <script type="math/tex">[x^n](A(x)+B(x)) = ([x^n]A(x) + [x^n]B(x))</script> (We can think of this like two mutually exclusive series, so we need to use sum rule to count them)</li>
+  <li>Power Rule <script type="math/tex">[x^n](A(kx) = k^n([x^n]A(X))</script></li>
+  <li>Reduction Rule <script type="math/tex">[x^n](kx^mA(X)) = k[x^{n-m}A(x)]</script> (This is because we can think <script type="math/tex">x^m</script> is a shift of terms to the series, so we can find the correct coefficient by offset)</li>
+  <li>Product Rule <script type="math/tex">[x^n](A(x) * B(x)) = [x^k]A(x) * [x^{k-1}]B(x</script>)</li>
+</ol>
 
 <h3 id="what-is-a-graph">What is a graph</h3>
 <p>graph is a collection of vertices, V, and edges E.</p>

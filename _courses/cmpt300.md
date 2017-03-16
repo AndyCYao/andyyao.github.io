@@ -30,3 +30,28 @@ When there is a new virtual memory being accessed, there is nothing in the page 
 
 The page table is created per every process. the OS has to perform context switch to switch out the different page tables in the register. 
 
+#### Page Table 
+Page table keeps bit flags such as isPresent, isDirty, isReadOnly etc. these flags provide the decision for page fault. 
+
+#### Hiearchicial Page Table 
+This is a lay out of page table in an effort to save space. 
+
+Outer Page or Top Page Table is the page table directory. The outer page acts as a pointer to the inner table, 
+the Internal page table is only for valid virtual memory region. The total number of virtual addresses are still the same as compare to the flat tables. However, the various internal tables are only allocated when needed. in this way it saves space. 
+
+Multi Level PT Trade off 
+-Adding more internal layers offers smaller granuarity of coverage in terms of addresses 
+however, the trade off is there is more latency in accessing data. 
+
+##### Translation Look Aside Buffer
+The TLB is a MMU level address translation cache, it is used to speed up looking through page table. It stores some page table record. MMU looks to the TLB before looking at page table (which is stored in memory)
+
+### Segmentation 
+Is logical addresses that are arranged arbitrarily, could be arranged due to code, heap data, stack, etc. 
+
+the logical address has the form 
+	<segment-number, offset>
+and uses the segment table to translate from logical to physical address
+
+### Demand Paging
+Note physical memory is less than virtual memory. 

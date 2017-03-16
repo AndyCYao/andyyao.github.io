@@ -55,12 +55,25 @@ g(n) of $$ n^tr^n $$ is $$\quad r^n(A_tn^t + A_{t-1}n^{t-1} + A_{t-2}n^{t-2} + .
 \$$ a_n^p = C2^n + Dn^23^n $$ where C D are constants to solve for the particular solution 
 4. the solution is now in the form of 
 \$$ a_n = a_n^h + a_n^p = Ar_1^n + Br_2^n + C2^n + Dn^2(3^n) $$ 
-5. Use coefficient copmarision to solve for C and D in $$ a_n^p $$ by plugging $$ a_n^p $$ into the recurrence soluation at 1.
+5. Use coefficient comparision to solve for C and D in $$ a_n^p $$ by plugging $$ a_n^p $$ into the recurrence soluation at 1.
 6. Once we found C, D , we can solve for A, B by setting up 4. $$ a_n $$ with the values from 5. 
 
 ### Extended Binomial Theorem
-	Formula for (fraction, n) and (negative, n)
+Formula for (fraction, n) and (negative, n) follows the form 
+
+$$ (n,r) = (n(n-1)(n-2)...(n-r+1))/r! $$
+
+for (negative, n) this simplies to 
+
+$$ (-1)^r(n+r-1, r) $$
 ### Coefficient Extraction
+Coefficient extraction is used to solve recurrence relations, and find combinatoric sums , amongsts other things.
+
+There are several rules we can follow 
+1. Sum Rule $$ [x^n](A(x)+B(x)) = ([x^n]A(x) + [x^n]B(x)) $$ (We can think of this like two mutually exclusive series, so we need to use sum rule to count them)
+2. Power Rule $$ [x^n](A(kx) = k^n([x^n]A(X)) $$
+3. Reduction Rule $$ [x^n](kx^mA(X)) = k[x^{n-m}A(x)] $$ (This is because we can think $$ x^m $$ is a shift of terms to the series, so we can find the correct coefficient by offset)
+4. Product Rule $$ [x^n](A(x) * B(x)) = [x^k]A(x) * [x^{k-1}]B(x $$)
 
 ### What is a graph
 graph is a collection of vertices, V, and edges E. 
