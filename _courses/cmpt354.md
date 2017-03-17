@@ -96,3 +96,147 @@ a  = All  {a,3} 	False
 a = Any 	{}	False
 
 a = All	{}	True
+
+## Exam 2 Prep Notes
+
+### Aggregate Operators
+Operates on tuple sets, keywords include 
+- COUNT(), 
+- COUNT(DISTINCT())
+- SUM()
+- AVG()
+- MAX()
+- MIN()
+Note when doing aggregation, need to include 'GROUP BY' keyword
+
+the HAVING keyword acts as a filter to the aggregate clause. 
+
+### Null Values
+can be interpreted as 
+- Value Unknown(eg, rating has not yet been assigned)
+- Value inapplicable ( no spouse's name)
+- Value withheld (phone number)
+
+Rule For Null:
+- an arithmetic operator with at least one NULL argument always returns NULL
+- Comparison of a NULL value to any second value returns a result o UNKNOWN
+therefore, a selection returns only these tuples that makes the condition in the WHERE clause TRUE, those with unknown or false do not qualify. 
+As part of 3 value logic (Ture False Unknown)
+
+TRUE AND UNKNOWN = UNKNOWN
+
+FALSE AND UNKNOWN = FALSE
+
+FALSE OR UNKNOWN = UNKNOWN
+
+NOT UNKNOWN = UNKNOWN
+
+~~~ sql
+SELECT * 
+FROM t1
+WHERE col_1 > 5
+OR col_1 < 5
+OR col_1 = 5
+~~~
+Any record where col_1 has NULL will not be returned in the above query
+
+### Outer Joins
+SQL outer joins include NULL values
+
+~~~ sql
+SELECT *
+FROM a LEFT OUTER JOIN b
+ON a.id = b.id
+~~~
+LEFT OUTER JOIN would show dangling tuples from left input table. (null is filled for all attribute of right input)
+
+RIGHT OUTER JOIN does the same but from right table's perspective
+
+FULL OUTER JOIN shows dangling tuples from both input table
+
+### Security 
+
+~~~ sql
+-- ex1
+GRANT SELECT, INSERT, DELETE 
+ON Reserves 
+TO Yuppy 
+WITH GRANT OPTION
+
+-- ex2
+GRANT UPDATE(rating) ON Sailors TO
+Leah
+~~~
+user yuppy can now select, insert, and delete, and also grant other people these privileges. 
+
+user leah can now update ratings, but can't gran this privilege to other. 
+
+### View
+use view when you want more control on whether the user can read, write, execute depending on authorization level.
+
+View is a relation that is stored for use later. 
+
+### Integrity Constraints CHECK and ASSERTION
+Types of IC include:
+- Domain Constraint (field values must be right type, always enforced)
+- Attribute based CHECK (defined in declaration of an attribute, activate on insertion)
+~~~ sql
+CREATE TABLE ..
+... CHECK (col_1 >= 1 AND col_2 <= 30)
+
+-- can also name the check 
+CREATE TABLE ...
+CONSTRAINT noFoo
+CHECK('Foo' <> ANY(SELECT ...))
+~~~
+	
+- Tuple-Based Check (defined in declaration of table, activate on insertion to corrosponding table or update of tuple) 
+~~~ sql
+CREATE TABLE ...
+... CHECK(colA >= colB)
+~~~
+- Assertion: (defined independently from any table, activate on any modification of any table mentioned in assertion)
+~~~sql
+CREATE ASSERTION notTooManyReservations
+CHECK (10 > ALL (SELECT COUNT(*)
+				FROM Reserves
+				GROUP BY sid))
+~~~
+Checks and Assertions are not well supported in SQL.
+
+Check is not in SQL SERVER
+
+Assertion is not supported in postgresSQL
+
+### Triggers
+procedures that starts automatically if specificed change occurs in the DBMS.
+
+has 
+- Event (activates the trigger)
+- Condition (tests whether trigger should run)
+- Action
+
+~~~ sql
+CREATE TRIGGER youngSailorUpdate
+    AFTER INSERT ON SAILORS			/* Event */
+    REFERENCING NEW TABLE NewSailors	
+    FOR EACH STATEMENT
+	   INSERT					/* Action */
+		INTO YoungSailors(sid, name, age, rating)
+		SELECT sid, name, age, rating
+		FROM NewSailors N
+		WHERE N.age <= 18;
+-- Referencing include
+NEW TABLE
+OLD TABLE
+OLD ROW
+NEW ROW
+--- Use begin and end to include multiple SQL Statements
+~~~
+the above inserts young sailors into separate table. 
+
+### Trigger Vs General Constraints
+Triggers can be activated in one SQL statement, but with arbitrary order,
+trigger can activate other triggers.
+
+trigger is more general than constraints, it can be used to monitor integrity constraints, construct a log, gather database stats. etc. 
