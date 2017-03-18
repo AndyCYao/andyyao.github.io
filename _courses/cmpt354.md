@@ -240,3 +240,123 @@ Triggers can be activated in one SQL statement, but with arbitrary order,
 trigger can activate other triggers.
 
 trigger is more general than constraints, it can be used to monitor integrity constraints, construct a log, gather database stats. etc. 
+
+### Application Dev. 
+we can connect our application to a database through librarys with database calls (API).
+
+We would pass SQL string to the API, must include a statement to connect to the right database. 
+
+Connecting to Database Flow Chart 
+- Load Driver (do this once)
+- Driver Manager (do this once)
+- Connection (do this once)
+- Statement (repeatable)
+- Query = String (repeatable)
+- Cursor, Result (repeatable)
+
+### Cursor
+Since we don't know before hand how many records we fetch (a priori) SQL uses a mechanism call *cursor* to handle row selection
+
+SQL Standard, Stored Procedure PSM  Term is Cursor 
+Java Term is ResultSet
+Visual Studio Term is DataReader
+
+### Stored Procedure
+written in general purpose programming language (Persistent stored modules PSM), and executed within the DBS. This extends SQL by basic concepts of a general purpose programming language. 
+
+#### Impedance Mismatch
+Since SQL is a declarative language while C and other language are procedural. there is different approach as to how data is handle, leading to unnecessary effort. Problem is trying to fit object oriented program into relational database. 
+
+~~~sql
+-- Sample create procedure
+CREATE FUNCTION rateSailor (@sailorId INT)
+   RETURNS INT
+AS
+BEGIN
+   DECLARE @numRes INT
+   DECLARE @rating INT
+	SET @numRes = (SELECT COUNT(*)
+                           FROM Reserves R
+                       WHERE R.sid = @sailorId)
+   IF @numRes > 10 
+       SET @rating = 1
+   ELSE
+       SET @rating = 0
+   RETURN @rating
+END
+GO;
+SELECT dbo.rateSailor(22); go
+
+-- Can call a function
+EXEC SQL CALL functionName(@sid, @rating) 
+~~~
+
+### Advantage of Stored Procedure 
+- encapsulates application logic while staying close to the data.
+- different users can run the same logic 
+- does not need cursor
+- provides data security
+
+### Internet App.
+3 tier architecture , each tier can be independently maintained. 
+- Presentation Layer -> HTML, CSS, Javascript, adapt to different display devices
+- Middle Tier -> CGI , application server, (not emphasis in course)
+- Database -> DB2, SQL Server
+
+#### Thin Client and Thick Client Work Division
+##### thin client 
+only does graphic user interface. the business logic, data management depends on the server 
+
+##### thick client. 
+implements both graphic and business logic. while server implements data management
+
+Downside -> server has to trust client, has scalability issue. hard to update all clients. 
+
+### HTTP Hypertext Transfer Protocol 
+1. client(browser) sends HTTP request to server 
+2. server receives request and replies 
+3. Client receives reply, makes new request
+	
+	GET ~/index.html HTTP/1.1 -- Request Line
+	User-agent: Mozilla/4.0   -- Type of client
+	Accept: text/html, image/gif, image/jpeg 
+
+HTTP is stateless, every message is self contained. fires and forget. the advantage of this is don't need memory management. good for static information
+
+Disadvantage is, no shopping baskets, user logins, dynamic content, and security is harder to implement.
+
+#### Maintaing State, Client state or Server Side State
+1. Server Side 
+- Maintains data in a database, but requires database access to query or update. 
+- Or stays in the application layer local memory. 
+- this is used to persist old customer orders, click trails, user's movement etc. 
+2. Client Side
+- stores in cookies, the cookie is passed with every HTTP request. is a collection of (Name, Value) pair
+- use cookies to store current user information, current shopping basket, non permanent choices
+
+In a typical website:
+
+- User logins are kept in cookies 
+- User shopping basket kept in another cookie 
+- User purchased information and credit card info are kept in server database. 
+- Uer click streams are kept in a log on the web sever. 
+
+#### HTTP Response
+1. 200 OK Request Success
+2. 400 Bad Request, request could not be fulfilled 
+3. 404 Not Found,  does not exists
+4. 505 HTTP Version Not Supported
+
+### HTML Forms
+	<FORM ACTION=“page.jsp” METHOD=“GET”
+			NAME=“LoginForm”>
+	…
+	</FORM>
+
+in the above, Action is the specific URI that handles the content 
+Method -> HTTP GET or POST method
+NAME -> name of the form. 
+
+### Javascript 
+adds functionality to the presentation tier. 
+

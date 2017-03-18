@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>Welcome to Andy's homepage! by AndyCYao</title>
 
-    <link rel="stylesheet" href="/blog/assets/css/style.css?v=21e917046af01d4716be726e1c28af849181ab62">
+    <link rel="stylesheet" href="/blog/assets/css/style.css?v=88e7ea5a48407b7c8b40a34d978f59c7c608880c">
     <meta name="viewport" content="width=device-width">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -66,6 +66,31 @@ it is also responsible for reporting faults, such as illegal access etc.</p>
 
 <p>The page table is created per every process. the OS has to perform context switch to switch out the different page tables in the register.</p>
 
+<h4 id="page-table">Page Table</h4>
+<p>Page table keeps bit flags such as isPresent, isDirty, isReadOnly etc. these flags provide the decision for page fault.</p>
+
+<h4 id="hiearchicial-page-table">Hiearchicial Page Table</h4>
+<p>This is a lay out of page table in an effort to save space.</p>
+
+<p>Outer Page or Top Page Table is the page table directory. The outer page acts as a pointer to the inner table, 
+the Internal page table is only for valid virtual memory region. The total number of virtual addresses are still the same as compare to the flat tables. However, the various internal tables are only allocated when needed. in this way it saves space.</p>
+
+<p>Multi Level PT Trade off 
+-Adding more internal layers offers smaller granuarity of coverage in terms of addresses 
+however, the trade off is there is more latency in accessing data.</p>
+
+<h5 id="translation-look-aside-buffer">Translation Look Aside Buffer</h5>
+<p>The TLB is a MMU level address translation cache, it is used to speed up looking through page table. It stores some page table record. MMU looks to the TLB before looking at page table (which is stored in memory)</p>
+
+<h3 id="segmentation">Segmentation</h3>
+<p>Is logical addresses that are arranged arbitrarily, could be arranged due to code, heap data, stack, etc.</p>
+
+<p>the logical address has the form 
+	&lt;segment-number, offset&gt;
+and uses the segment table to translate from logical to physical address</p>
+
+<h3 id="demand-paging">Demand Paging</h3>
+<p>Note physical memory is less than virtual memory.</p>
 
 
       </section>
