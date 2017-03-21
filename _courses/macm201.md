@@ -124,8 +124,22 @@ Planar graph is a graph that can be drawn without intersecting edges.
 Each planar graph have planar embedding 
 which are different variations of planar graph
 
+#### A subgraph of a planar graph is planar
+1. Given G is a planar graph, implying there's a planar embedding of G 
+2. H is obtained from G by removing vertices and/or edges
+3. Since G did not have crossing edges to begin with
+4. H would not have crossing edges either
+5. So H has a planar embedding, and is a planar graph
+
+
 #### $$ K_5\,and\,K_{3,3} $$ are the first non planar graphs 
 Kuratowsk Theorem says a graph is a planar IFF if it does not contain a subgraph of subdivision $$ K_5 \, and \, K_{3,3} $$
+
+#### Faces 
+Faces are regions in a *planar* graph. we can think of faces as regions closed off by a cycle within the graph. note not every cycle of G forms a face
+
+##### Euler Formula
+states \$$ faces = 2 + edges - vertices $$
 
 ### Hypercube
 two binary sequences of w and w' have distance 1 if they differ in a single position. 

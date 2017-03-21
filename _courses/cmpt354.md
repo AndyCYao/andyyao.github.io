@@ -360,3 +360,64 @@ NAME -> name of the form.
 ### Javascript 
 adds functionality to the presentation tier. 
 
+### Semi Structured Data and XML
+XML is designed for used by applications, and work across different applications. it uses a digraph to handle the database. the leaf nodes represent the attribute data of some atomic type, while interior nodes represent complex objects. 
+
+XML is ordered, S.S.D is not 
+
+XML can mix text and element, has attributes, entities, processing instruction, comments, SSD does not. 
+
+Labels indicate the relationship between two nodes. 
+
+the graph does not need to be a tree structure, but is usualy acyclic. 
+
+Object Exchange Model (OEM)
+-separates complex object by building them from atomic object
+
+#### XML Syntax #### 
+
+	<BOOK genre= 'Science' format = 'Hardcover'>..data...</BOOK>
+
+BOOK is the tag element , genre is the attribute, 'science' is attribute value
+
+there can be zero or more attribute to every element.
+![XML Tree]({{ site.url }}/images/XMLTree.jpeg)
+
+#### XML VS Relational Databases ####
+
+*Structure* RD uses table, XML is tree/ hiearchal graph
+*Schema* RD has fixed schema, XML is flexible, self describing
+*Queries* RD has SQL, XML has XPath, which is more complicated. 
+*Ordering* RD has no order, XML order is implied
+*Implementation* RD has native implementation, XML is add on. 
+
+### XPath ###
+is a query language for describing XML, uses tags to traverse through XML tree , and return series of qualifying items. 
+
+~~~xml 
+path expression starts with '/'
+/tag1/tag2 return 
+this returns the set of tags that has /tag1/tag2 
+
+attributes - use @id to filter by tag id 
+<bib>
+<book bookID = 'b100'></book>
+</bib>
+
+/bib/book/@bookID 
+returns sequence 'b100'...
+
+/bib/*[publisher = 'McGraw']
+returns tags that have values Mcgraw
+
+use * to indicate wildcard
+// is for descendants. 
+
+
+note, /bib/*/title and /bib//title is the same 
+
+/bib/*[publisher = 'McGraw']
+/bib/book[2]/author[1] second paper, first author. 
+/bib/(paper | book) find title of each element that is a paper or a book. 
+~~~
+

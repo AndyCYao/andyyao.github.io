@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>Welcome to Andy's homepage! by AndyCYao</title>
 
-    <link rel="stylesheet" href="/blog/assets/css/style.css?v=88e7ea5a48407b7c8b40a34d978f59c7c608880c">
+    <link rel="stylesheet" href="/blog/assets/css/style.css?v=0ff931024546dafcb33555ab45d5739455487b33">
     <meta name="viewport" content="width=device-width">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -444,6 +444,69 @@ NAME -&gt; name of the form.</p>
 
 <h3 id="javascript">Javascript</h3>
 <p>adds functionality to the presentation tier.</p>
+
+<h3 id="semi-structured-data-and-xml">Semi Structured Data and XML</h3>
+<p>XML is designed for used by applications, and work across different applications. it uses a digraph to handle the database. the leaf nodes represent the attribute data of some atomic type, while interior nodes represent complex objects.</p>
+
+<p>XML is ordered, S.S.D is not</p>
+
+<p>XML can mix text and element, has attributes, entities, processing instruction, comments, SSD does not.</p>
+
+<p>Labels indicate the relationship between two nodes.</p>
+
+<p>the graph does not need to be a tree structure, but is usualy acyclic.</p>
+
+<p>Object Exchange Model (OEM)
+-separates complex object by building them from atomic object</p>
+
+<h4 id="xml-syntax">XML Syntax</h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;BOOK genre= 'Science' format = 'Hardcover'&gt;..data...&lt;/BOOK&gt;
+</code></pre>
+</div>
+
+<p>BOOK is the tag element , genre is the attribute, ‘science’ is attribute value</p>
+
+<p>there can be zero or more attribute to every element.
+<img src="http://localhost:4000/images/XMLTree.jpeg" alt="XML Tree" /></p>
+
+<h4 id="xml-vs-relational-databases">XML VS Relational Databases</h4>
+
+<p><em>Structure</em> RD uses table, XML is tree/ hiearchal graph
+<em>Schema</em> RD has fixed schema, XML is flexible, self describing
+<em>Queries</em> RD has SQL, XML has XPath, which is more complicated. 
+<em>Ordering</em> RD has no order, XML order is implied
+<em>Implementation</em> RD has native implementation, XML is add on.</p>
+
+<h3 id="xpath">XPath</h3>
+<p>is a query language for describing XML, uses tags to traverse through XML tree , and return series of qualifying items.</p>
+
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code>path expression starts with '/'
+/tag1/tag2 return 
+this returns the set of tags that has /tag1/tag2 
+
+attributes - use @id to filter by tag id 
+<span class="nt">&lt;bib&gt;</span>
+<span class="nt">&lt;book</span> <span class="na">bookID =</span> <span class="s">'b100'</span><span class="nt">&gt;&lt;/book&gt;</span>
+<span class="nt">&lt;/bib&gt;</span>
+
+/bib/book/@bookID 
+returns sequence 'b100'...
+
+/bib/*[publisher = 'McGraw']
+returns tags that have values Mcgraw
+
+use * to indicate wildcard
+// is for descendants. 
+
+
+note, /bib/*/title and /bib//title is the same 
+
+/bib/*[publisher = 'McGraw']
+/bib/book[2]/author[1] second paper, first author. 
+/bib/(paper | book) find title of each element that is a paper or a book. 
+</code></pre>
+</div>
 
 
 

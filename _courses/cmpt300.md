@@ -55,3 +55,37 @@ and uses the segment table to translate from logical to physical address
 
 ### Demand Paging
 Note physical memory is less than virtual memory. 
+
+## Assignment 3 , Dissect 'A comparison of software and hardware technique for x86 virtualization - Keith Adams, Ole Agesen'
+
+### Terminologies
+- X86 - refers to intel processor architecture used in PC. started as 16 bit instruction for 16 bit processor.
+- hypervisor or Virtual machine monitor is a software, firmware, or hardware that runs virtual machines. 
+- trap and emulate virtualization - when an OS is running as a vritual machine, some of its instruction may conflict with the host operation system. so the 'hypervisor' emulates the effect of the specific instruction or action without carrying it out. 
+
+
+### Introduction
+In 2006 AMD and Intel introduced hardware VMM, but this paper find it is actually not as good as before, which was software assisted VMM (that does binary translation). The author believes it is due to high VMM / Guest transition cost and rigid programming model. 
+
+This paper will look into the reason, and explore page table updates, context switches, and I/O 
+
+Even the recent 32 and 64 bit protected mode are not classically virtualizable (due to lack of traps when privileged instructions run at user level, and visibility of privileged state)
+
+### Classical Virtualization
+To be considered as Virtual Machine Monitor. there are three characteristics. 
+- *Fidelity* Software on the VMM executes identically to its execution on hardware, save timing effect. 
+- *Performance* the majority of the guest instructions are executed by the hardware w/o intervietion of VMM 
+- *Safety* The VMM manages all hardware resouces
+
+#### De-privileging 
+a classical VMM executes guest operating systems directly, but at reduced privilege level. The VMM traps instruction from the de-privileged guest. 
+
+#### Tracing Example:
+VMM has a 'shadow page table' to protect the host from guest's memory access 
+
+'Trace' refers to identifying the guest's page table and host's page table. the shadow page table is write protected. This means there is overhead involved. 
+
+#### Simple Binary Translation 
+Uses a interpreter to separate virtual state from physicial state. this prevents leakage of privileged state from physical CPU into guest. 
+
+#### Dynamic Binary Translation

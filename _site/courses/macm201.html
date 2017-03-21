@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>Welcome to Andy's homepage! by AndyCYao</title>
 
-    <link rel="stylesheet" href="/blog/assets/css/style.css?v=88e7ea5a48407b7c8b40a34d978f59c7c608880c">
+    <link rel="stylesheet" href="/blog/assets/css/style.css?v=0ff931024546dafcb33555ab45d5739455487b33">
     <meta name="viewport" content="width=device-width">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -171,8 +171,23 @@ Thus 2|E| accounts for deg(v), for all v in vertices.</p>
 Each planar graph have planar embedding 
 which are different variations of planar graph</p>
 
+<h4 id="a-subgraph-of-a-planar-graph-is-planar">A subgraph of a planar graph is planar</h4>
+<ol>
+  <li>Given G is a planar graph, implying there’s a planar embedding of G</li>
+  <li>H is obtained from G by removing vertices and/or edges</li>
+  <li>Since G did not have crossing edges to begin with</li>
+  <li>H would not have crossing edges either</li>
+  <li>So H has a planar embedding, and is a planar graph</li>
+</ol>
+
 <h4 id="k_5andk_33-are-the-first-non-planar-graphs"><script type="math/tex">K_5\,and\,K_{3,3}</script> are the first non planar graphs</h4>
 <p>Kuratowsk Theorem says a graph is a planar IFF if it does not contain a subgraph of subdivision <script type="math/tex">K_5 \, and \, K_{3,3}</script></p>
+
+<h4 id="faces">Faces</h4>
+<p>Faces are regions in a <em>planar</em> graph. we can think of faces as regions closed off by a cycle within the graph. note not every cycle of G forms a face</p>
+
+<h5 id="euler-formula">Euler Formula</h5>
+<p>states $$ faces = 2 + edges - vertices $$</p>
 
 <h3 id="hypercube">Hypercube</h3>
 <p>two binary sequences of w and w’ have distance 1 if they differ in a single position.</p>
