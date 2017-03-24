@@ -8,6 +8,30 @@ semester: "Winter 2017"
 
 ## CMPT 371 Computer Networking Winter 2017
 
+### Network Layer 
+#### What's inside a router
+A router has four components
+-Input Port
+Handles the transferring of data from the incoming physicial link at the router.
+Uses the forwarding table to determine the packet's direction in the switching fabric.
+-Switching Fabric 
+connects the input port to the output port. behaves like a network inside a router.
+-Output Port
+Receives the packets from the switching fabric, and transmit them to the outgoing link
+-Routing Processor
+Handles the routing protocol, maintains te routing table and link state information
+
+#### Analogy
+Car coming from a highway enters a 'roundabout' that connects to different highway ramp.
+there is an attendant who the driver asks for direction, once given the direction, the driver enteres the roundable and continues on his way. 
+
+Car - Packet
+Attendant - Routing Processor
+Roundabout - Switching Fabric
+Highway - Input Port / Output Port
+
+#### Switching Techniques within the Switching Fabric
+-Switching Via Memory
 
 
 ### Link Layer (Level 2)
@@ -20,7 +44,7 @@ other possible services include:
 
 Link layer is implemented at the network adapter level, so hardware stuff. 
 
-### Analogy
+#### Analogy
 Travel Agent plans a tourist to travel from City A to City B. In which the tourist takes a car, an airplane, then a train. 
 
 Tourist - Datagram
