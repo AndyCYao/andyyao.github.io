@@ -8,6 +8,11 @@ semester: "Winter 2017"
 
 ## CMPT 300 Operating Systems Winter 2017
 
+### Master Boot Record (MBR)
+The MBR stores the details of the various partitions, their start address, end addresses etc. 
+
+It is loaded when the computer is booted, and the BIOS starts the MBR, which finds the active partition to load the operating system. 
+
 ### Memory Management
 there is a distinction between virtual memory , and physical memory.
 Processes do not access physical memory directly, they access virtual memory, and there is a memory management unit MMU that connects the virtual address to physical addresses.
