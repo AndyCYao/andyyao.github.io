@@ -1,0 +1,108 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Welcome to Andy's homepage! by AndyCYao</title>
+
+    <link rel="stylesheet" href="/blog/assets/css/style.css?v=0ff931024546dafcb33555ab45d5739455487b33">
+    <meta name="viewport" content="width=device-width">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Welcome to Andy's homepage!</h1>
+        <p>I use this blog to store the notes I have collected throughout my time learning computer science. Feel free to browse and comment</p>
+
+        
+          <p class="view"><a href="http://github.com/AndyCYao/blog">View the Project on GitHub <small></small></a></p>
+        
+
+        <!-- Added by AY 
+        In future, need to fix the /blog hardcoded reference to a relative reference, but currently could not figure out they keyword for the base url-->
+        
+        <p class="view"><a href="/blog/about.html ">About</a></p>
+        
+        <p class="view"><a href="/blog/courses.html ">Course Notes</a></p>
+        
+        <p class="view"><a href="/blog/ "></a></p>
+        
+        <p class="view"><a href="/blog/assets/css/style.css "></a></p>
+        
+
+        <!-- Added by AY -->
+
+
+        
+
+        
+      </header>
+      <section>
+      
+      <h2 id="cmpt-371-computer-networking-winter-2017">CMPT 371 Computer Networking Winter 2017</h2>
+
+<h3 id="link-layer-level-2">Link Layer (Level 2)</h3>
+<p>This layer deals with how datagrams are encapsulated in this level (call framing)</p>
+
+<p>other possible services include:</p>
+<ol>
+  <li>Medium Access Control - a protocol that deals with how frames are transmitted onto the link</li>
+  <li>Reliable Delivery - to guarantee the datagrams move across link without error. (this is used more in wireless links, where theres more error rate)</li>
+  <li>Error Detection and Correction - due to electrical issues and magnetic noise, sometimes bit errors are introduced. Link layer hardware have to check for errors using internet checksum.</li>
+</ol>
+
+<p>Link layer is implemented at the network adapter level, so hardware stuff.</p>
+
+<h3 id="analogy">Analogy</h3>
+<p>Travel Agent plans a tourist to travel from City A to City B. In which the tourist takes a car, an airplane, then a train.</p>
+
+<p>Tourist - Datagram
+Plane, Car, Train are - Various links
+Transportation Mode - is a link layer protocol.
+Travel Agent - Routing Protocol.</p>
+
+<h4 id="terminologies">Terminologies</h4>
+<p><em>Node</em> - anything that runs a link layer. such as hosts, routers, switches, WIFI access points.</p>
+
+<h4 id="broadcast-channel">Broadcast Channel</h4>
+<p>BC contains multiple hosts like wireless LAN, satellite network, hybrid fiber coaxial cable. 
+This needs a specific protocol call <em>medium access protocool</em>.</p>
+
+<h4 id="point-to-point-communication-link">Point To Point Communication Link</h4>
+<p>Found between two routers connected by long distance link, or between user’s computer and nearby ethernet. this uses <em>point to point protocol</em></p>
+
+<h3 id="error-detection-and-error-correction">Error Detection and Error Correction</h3>
+<p>Three types of error detection is introduced in our course</p>
+
+<ol>
+  <li>
+    <p>Parity Check - the sender adds a ‘1’ bit to the total number of bits of the datagram. such that the total number of 1s are either even or odd (predetermined). the receiver then can just count the 1s, if odd ones are found in an even scheme, then it has an error. note it would be an undetected error if the bits are even in a even scheme, but still there is error.</p>
+  </li>
+  <li>
+    <p>Checksumming - basically sum up the k bit integers, take the 1s complement. the receiver then takes the 1s complement of the received datagram, and see if it all is 1 bits. If not, then there are errors.</p>
+  </li>
+  <li>
+    <p>Cyclic Redundancy Check (CRC) - most widely used today. sender wants to send d bit pieces of data, D. sender and receiver agree on a ‘Generator’ G , the sender adds a ‘r’ additional bit to d. the receiver then divides this d+r with G. If the remainder is non zero. then an error has occured.</p>
+  </li>
+</ol>
+
+
+
+      </section>
+      <footer>
+        
+        <p>This project is maintained by <a href="http://github.com/AndyCYao">AndyCYao</a></p>
+        
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="/blog/assets/js/scale.fix.js"></script>
+
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+
+  
+  </body>
+</html>

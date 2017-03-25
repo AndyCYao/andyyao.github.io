@@ -93,6 +93,35 @@ $$ G=(V,E) $$ be a connected graph or multigraph, G has a Eulerian circuit *IFF*
 
 *Corollary* $$ G=(V,E) $$ be a connected graph or multigraph. G has an Eulerian Trail *IFF* G has exactly two vertices of odd degree.
 
+### Hamilton Path and Hamilton Cycle
+This is a path/cycle (so no repeat vertice) that traverses all the vertices exactly once in the graph.
+
+finding a hamilton path is NP complete, meaning there is no known algorithm that can find the solution in an appropriate amount of time. 
+
+##### Necessary and Sufficient Condition
+- *Sufficient* if p is true then q is true. 
+- *Necessary* if q is true, then p is true. as in, 
+	example, if p is necessary for q, then q cannot be true unless p is true
+- *Necessary and Sufficient* p is true IFF q is true. Acing the test is *necessary* and *sufficient* for getting 100% on a test. 
+	
+- *Necessary But Not Sufficient* Steering well is *necessary* for driving well, but *not sufficient* , because you need to follow traffic rules, not hit pedestrians, etc. 
+
+- *Sufficient But not Necessary* Boiling a potato is *sufficient* for cooking a potato, but not *necessary*, because its not the only way to cook, you could fry, roast, etc.
+
+#### Sufficient Condition 1 for Identifying Hamilton Path / Cycle
+/$$ for all vertices x, y/, with |V| >=2 x != y /, deg(x) + deg(y) >= n-1$$ 
+and
+/$$ for all vertices x, y/, with |V| >=3 x != y /, deg(x) + deg(y) >= n$$ 
+
+This is a sufficient condition for a graph to admit a Hamilton cycle. 
+
+#### Sufficient Condition 2 for Identifying Hamilton Path / Cycle
+/$$ for all vertices x /, deg(x) >= (n-1)/2$$ 
+This is another sufficient condition for having a HP
+
+#### Necessary Condition for Identifying Hamilton *Cycle* in Bipartite Graph
+given a bipartite graph organize by set V1 and set V2 . There needs to be |V1| = |v2| for there to be a hamilton cycle
+
 ### Theorem -  If G=(V, E) is an undirected graph or multi graph , then sum of all the degrees of the vertices are 2|E|
 
 Proof - 
@@ -124,8 +153,22 @@ Planar graph is a graph that can be drawn without intersecting edges.
 Each planar graph have planar embedding 
 which are different variations of planar graph
 
+#### A subgraph of a planar graph is planar
+1. Given G is a planar graph, implying there's a planar embedding of G 
+2. H is obtained from G by removing vertices and/or edges
+3. Since G did not have crossing edges to begin with
+4. H would not have crossing edges either
+5. So H has a planar embedding, and is a planar graph
+
+
 #### $$ K_5\,and\,K_{3,3} $$ are the first non planar graphs 
 Kuratowsk Theorem says a graph is a planar IFF if it does not contain a subgraph of subdivision $$ K_5 \, and \, K_{3,3} $$
+
+#### Faces 
+Faces are regions in a *planar* graph. we can think of faces as regions closed off by a cycle within the graph. note not every cycle of G forms a face
+
+##### Euler Formula
+states \$$ faces = 2 + edges - vertices $$
 
 ### Hypercube
 two binary sequences of w and w' have distance 1 if they differ in a single position. 
@@ -135,6 +178,7 @@ Hypercubes have strings as vertices, and edges if two strings differ by distance
 The distance between two vertices is the *shortest path* between the two
 #### Hamming Distance 
 two binary sequence w, and w' of length n, the hamming distance is the number of positions in the string where they are different. 
+
 ## Graph Proofs
 
 ### Proof for all x - y walks in a graph, there exists a x -y path

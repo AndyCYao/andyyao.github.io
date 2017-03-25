@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>Welcome to Andy's homepage! by AndyCYao</title>
 
-    <link rel="stylesheet" href="/blog/assets/css/style.css?v=21e917046af01d4716be726e1c28af849181ab62">
+    <link rel="stylesheet" href="/blog/assets/css/style.css?v=0ff931024546dafcb33555ab45d5739455487b33">
     <meta name="viewport" content="width=device-width">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -66,6 +66,68 @@ it is also responsible for reporting faults, such as illegal access etc.</p>
 
 <p>The page table is created per every process. the OS has to perform context switch to switch out the different page tables in the register.</p>
 
+<h4 id="page-table">Page Table</h4>
+<p>Page table keeps bit flags such as isPresent, isDirty, isReadOnly etc. these flags provide the decision for page fault.</p>
+
+<h4 id="hiearchicial-page-table">Hiearchicial Page Table</h4>
+<p>This is a lay out of page table in an effort to save space.</p>
+
+<p>Outer Page or Top Page Table is the page table directory. The outer page acts as a pointer to the inner table, 
+the Internal page table is only for valid virtual memory region. The total number of virtual addresses are still the same as compare to the flat tables. However, the various internal tables are only allocated when needed. in this way it saves space.</p>
+
+<p>Multi Level PT Trade off 
+-Adding more internal layers offers smaller granuarity of coverage in terms of addresses 
+however, the trade off is there is more latency in accessing data.</p>
+
+<h5 id="translation-look-aside-buffer">Translation Look Aside Buffer</h5>
+<p>The TLB is a MMU level address translation cache, it is used to speed up looking through page table. It stores some page table record. MMU looks to the TLB before looking at page table (which is stored in memory)</p>
+
+<h3 id="segmentation">Segmentation</h3>
+<p>Is logical addresses that are arranged arbitrarily, could be arranged due to code, heap data, stack, etc.</p>
+
+<p>the logical address has the form 
+	&lt;segment-number, offset&gt;
+and uses the segment table to translate from logical to physical address</p>
+
+<h3 id="demand-paging">Demand Paging</h3>
+<p>Note physical memory is less than virtual memory.</p>
+
+<h2 id="assignment-3--dissect-a-comparison-of-software-and-hardware-technique-for-x86-virtualization---keith-adams-ole-agesen">Assignment 3 , Dissect ‘A comparison of software and hardware technique for x86 virtualization - Keith Adams, Ole Agesen’</h2>
+
+<h3 id="terminologies">Terminologies</h3>
+<ul>
+  <li>X86 - refers to intel processor architecture used in PC. started as 16 bit instruction for 16 bit processor.</li>
+  <li>hypervisor or Virtual machine monitor is a software, firmware, or hardware that runs virtual machines.</li>
+  <li>trap and emulate virtualization - when an OS is running as a vritual machine, some of its instruction may conflict with the host operation system. so the ‘hypervisor’ emulates the effect of the specific instruction or action without carrying it out.</li>
+</ul>
+
+<h3 id="introduction">Introduction</h3>
+<p>In 2006 AMD and Intel introduced hardware VMM, but this paper find it is actually not as good as before, which was software assisted VMM (that does binary translation). The author believes it is due to high VMM / Guest transition cost and rigid programming model.</p>
+
+<p>This paper will look into the reason, and explore page table updates, context switches, and I/O</p>
+
+<p>Even the recent 32 and 64 bit protected mode are not classically virtualizable (due to lack of traps when privileged instructions run at user level, and visibility of privileged state)</p>
+
+<h3 id="classical-virtualization">Classical Virtualization</h3>
+<p>To be considered as Virtual Machine Monitor. there are three characteristics.</p>
+<ul>
+  <li><em>Fidelity</em> Software on the VMM executes identically to its execution on hardware, save timing effect.</li>
+  <li><em>Performance</em> the majority of the guest instructions are executed by the hardware w/o intervietion of VMM</li>
+  <li><em>Safety</em> The VMM manages all hardware resouces</li>
+</ul>
+
+<h4 id="de-privileging">De-privileging</h4>
+<p>a classical VMM executes guest operating systems directly, but at reduced privilege level. The VMM traps instruction from the de-privileged guest.</p>
+
+<h4 id="tracing-example">Tracing Example:</h4>
+<p>VMM has a ‘shadow page table’ to protect the host from guest’s memory access</p>
+
+<p>‘Trace’ refers to identifying the guest’s page table and host’s page table. the shadow page table is write protected. This means there is overhead involved.</p>
+
+<h4 id="simple-binary-translation">Simple Binary Translation</h4>
+<p>Uses a interpreter to separate virtual state from physicial state. this prevents leakage of privileged state from physical CPU into guest.</p>
+
+<h4 id="dynamic-binary-translation">Dynamic Binary Translation</h4>
 
 
       </section>

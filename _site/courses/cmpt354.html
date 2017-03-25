@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>Welcome to Andy's homepage! by AndyCYao</title>
 
-    <link rel="stylesheet" href="/blog/assets/css/style.css?v=21e917046af01d4716be726e1c28af849181ab62">
+    <link rel="stylesheet" href="/blog/assets/css/style.css?v=0ff931024546dafcb33555ab45d5739455487b33">
     <meta name="viewport" content="width=device-width">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -144,6 +144,370 @@ e.g. Find the snames of suppliers who supply only red parts.</p>
 <p>a = Any 	{}	False</p>
 
 <p>a = All	{}	True</p>
+
+<h2 id="exam-2-prep-notes">Exam 2 Prep Notes</h2>
+
+<h3 id="aggregate-operators">Aggregate Operators</h3>
+<p>Operates on tuple sets, keywords include</p>
+<ul>
+  <li>COUNT(),</li>
+  <li>COUNT(DISTINCT())</li>
+  <li>SUM()</li>
+  <li>AVG()</li>
+  <li>MAX()</li>
+  <li>MIN()
+Note when doing aggregation, need to include ‘GROUP BY’ keyword</li>
+</ul>
+
+<p>the HAVING keyword acts as a filter to the aggregate clause.</p>
+
+<h3 id="null-values">Null Values</h3>
+<p>can be interpreted as</p>
+<ul>
+  <li>Value Unknown(eg, rating has not yet been assigned)</li>
+  <li>Value inapplicable ( no spouse’s name)</li>
+  <li>Value withheld (phone number)</li>
+</ul>
+
+<p>Rule For Null:</p>
+<ul>
+  <li>an arithmetic operator with at least one NULL argument always returns NULL</li>
+  <li>Comparison of a NULL value to any second value returns a result o UNKNOWN
+therefore, a selection returns only these tuples that makes the condition in the WHERE clause TRUE, those with unknown or false do not qualify. 
+As part of 3 value logic (Ture False Unknown)</li>
+</ul>
+
+<p>TRUE AND UNKNOWN = UNKNOWN</p>
+
+<p>FALSE AND UNKNOWN = FALSE</p>
+
+<p>FALSE OR UNKNOWN = UNKNOWN</p>
+
+<p>NOT UNKNOWN = UNKNOWN</p>
+
+<div class="language-sql highlighter-rouge"><pre class="highlight"><code><span class="k">SELECT</span> <span class="o">*</span> 
+<span class="k">FROM</span> <span class="n">t1</span>
+<span class="k">WHERE</span> <span class="n">col_1</span> <span class="o">&gt;</span> <span class="mi">5</span>
+<span class="k">OR</span> <span class="n">col_1</span> <span class="o">&lt;</span> <span class="mi">5</span>
+<span class="k">OR</span> <span class="n">col_1</span> <span class="o">=</span> <span class="mi">5</span>
+</code></pre>
+</div>
+<p>Any record where col_1 has NULL will not be returned in the above query</p>
+
+<h3 id="outer-joins">Outer Joins</h3>
+<p>SQL outer joins include NULL values</p>
+
+<div class="language-sql highlighter-rouge"><pre class="highlight"><code><span class="k">SELECT</span> <span class="o">*</span>
+<span class="k">FROM</span> <span class="n">a</span> <span class="k">LEFT</span> <span class="k">OUTER</span> <span class="k">JOIN</span> <span class="n">b</span>
+<span class="k">ON</span> <span class="n">a</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">id</span>
+</code></pre>
+</div>
+<p>LEFT OUTER JOIN would show dangling tuples from left input table. (null is filled for all attribute of right input)</p>
+
+<p>RIGHT OUTER JOIN does the same but from right table’s perspective</p>
+
+<p>FULL OUTER JOIN shows dangling tuples from both input table</p>
+
+<h3 id="security">Security</h3>
+
+<div class="language-sql highlighter-rouge"><pre class="highlight"><code><span class="c1">-- ex1</span>
+<span class="k">GRANT</span> <span class="k">SELECT</span><span class="p">,</span> <span class="k">INSERT</span><span class="p">,</span> <span class="k">DELETE</span> 
+<span class="k">ON</span> <span class="n">Reserves</span> 
+<span class="k">TO</span> <span class="n">Yuppy</span> 
+<span class="k">WITH</span> <span class="k">GRANT</span> <span class="k">OPTION</span>
+
+<span class="c1">-- ex2</span>
+<span class="k">GRANT</span> <span class="k">UPDATE</span><span class="p">(</span><span class="n">rating</span><span class="p">)</span> <span class="k">ON</span> <span class="n">Sailors</span> <span class="k">TO</span>
+<span class="n">Leah</span>
+</code></pre>
+</div>
+<p>user yuppy can now select, insert, and delete, and also grant other people these privileges.</p>
+
+<p>user leah can now update ratings, but can’t gran this privilege to other.</p>
+
+<h3 id="view">View</h3>
+<p>use view when you want more control on whether the user can read, write, execute depending on authorization level.</p>
+
+<p>View is a relation that is stored for use later.</p>
+
+<h3 id="integrity-constraints-check-and-assertion">Integrity Constraints CHECK and ASSERTION</h3>
+<p>Types of IC include:</p>
+<ul>
+  <li>Domain Constraint (field values must be right type, always enforced)</li>
+  <li>Attribute based CHECK (defined in declaration of an attribute, activate on insertion)
+~~~ sql
+CREATE TABLE ..
+… CHECK (col_1 &gt;= 1 AND col_2 &lt;= 30)</li>
+</ul>
+
+<p>– can also name the check 
+CREATE TABLE …
+CONSTRAINT noFoo
+CHECK(‘Foo’ &lt;&gt; ANY(SELECT …))</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>	
+- Tuple-Based Check (defined in declaration of table, activate on insertion to corrosponding table or update of tuple) 
+~~~ sql
+CREATE TABLE ...
+... CHECK(colA &gt;= colB)
+</code></pre>
+</div>
+<ul>
+  <li>Assertion: (defined independently from any table, activate on any modification of any table mentioned in assertion)
+    <div class="language-sql highlighter-rouge"><pre class="highlight"><code><span class="k">CREATE</span> <span class="k">ASSERTION</span> <span class="n">notTooManyReservations</span>
+<span class="k">CHECK</span> <span class="p">(</span><span class="mi">10</span> <span class="o">&gt;</span> <span class="k">ALL</span> <span class="p">(</span><span class="k">SELECT</span> <span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span>
+              <span class="k">FROM</span> <span class="n">Reserves</span>
+              <span class="k">GROUP</span> <span class="k">BY</span> <span class="n">sid</span><span class="p">))</span>
+</code></pre>
+    </div>
+    <p>Checks and Assertions are not well supported in SQL.</p>
+  </li>
+</ul>
+
+<p>Check is not in SQL SERVER</p>
+
+<p>Assertion is not supported in postgresSQL</p>
+
+<h3 id="triggers">Triggers</h3>
+<p>procedures that starts automatically if specificed change occurs in the DBMS.</p>
+
+<p>has</p>
+<ul>
+  <li>Event (activates the trigger)</li>
+  <li>Condition (tests whether trigger should run)</li>
+  <li>Action</li>
+</ul>
+
+<div class="language-sql highlighter-rouge"><pre class="highlight"><code><span class="k">CREATE</span> <span class="k">TRIGGER</span> <span class="n">youngSailorUpdate</span>
+    <span class="k">AFTER</span> <span class="k">INSERT</span> <span class="k">ON</span> <span class="n">SAILORS</span>			<span class="cm">/* Event */</span>
+    <span class="k">REFERENCING</span> <span class="k">NEW</span> <span class="k">TABLE</span> <span class="n">NewSailors</span>	
+    <span class="k">FOR</span> <span class="k">EACH</span> <span class="k">STATEMENT</span>
+	   <span class="k">INSERT</span>					<span class="cm">/* Action */</span>
+		<span class="k">INTO</span> <span class="n">YoungSailors</span><span class="p">(</span><span class="n">sid</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">,</span> <span class="n">rating</span><span class="p">)</span>
+		<span class="k">SELECT</span> <span class="n">sid</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">,</span> <span class="n">rating</span>
+		<span class="k">FROM</span> <span class="n">NewSailors</span> <span class="n">N</span>
+		<span class="k">WHERE</span> <span class="n">N</span><span class="p">.</span><span class="n">age</span> <span class="o">&lt;=</span> <span class="mi">18</span><span class="p">;</span>
+<span class="c1">-- Referencing include</span>
+<span class="k">NEW</span> <span class="k">TABLE</span>
+<span class="k">OLD</span> <span class="k">TABLE</span>
+<span class="k">OLD</span> <span class="k">ROW</span>
+<span class="k">NEW</span> <span class="k">ROW</span>
+<span class="c1">--- Use begin and end to include multiple SQL Statements</span>
+</code></pre>
+</div>
+<p>the above inserts young sailors into separate table.</p>
+
+<h3 id="trigger-vs-general-constraints">Trigger Vs General Constraints</h3>
+<p>Triggers can be activated in one SQL statement, but with arbitrary order,
+trigger can activate other triggers.</p>
+
+<p>trigger is more general than constraints, it can be used to monitor integrity constraints, construct a log, gather database stats. etc.</p>
+
+<h3 id="application-dev">Application Dev.</h3>
+<p>we can connect our application to a database through librarys with database calls (API).</p>
+
+<p>We would pass SQL string to the API, must include a statement to connect to the right database.</p>
+
+<p>Connecting to Database Flow Chart</p>
+<ul>
+  <li>Load Driver (do this once)</li>
+  <li>Driver Manager (do this once)</li>
+  <li>Connection (do this once)</li>
+  <li>Statement (repeatable)</li>
+  <li>Query = String (repeatable)</li>
+  <li>Cursor, Result (repeatable)</li>
+</ul>
+
+<h3 id="cursor">Cursor</h3>
+<p>Since we don’t know before hand how many records we fetch (a priori) SQL uses a mechanism call <em>cursor</em> to handle row selection</p>
+
+<p>SQL Standard, Stored Procedure PSM  Term is Cursor 
+Java Term is ResultSet
+Visual Studio Term is DataReader</p>
+
+<h3 id="stored-procedure">Stored Procedure</h3>
+<p>written in general purpose programming language (Persistent stored modules PSM), and executed within the DBS. This extends SQL by basic concepts of a general purpose programming language.</p>
+
+<h4 id="impedance-mismatch">Impedance Mismatch</h4>
+<p>Since SQL is a declarative language while C and other language are procedural. there is different approach as to how data is handle, leading to unnecessary effort. Problem is trying to fit object oriented program into relational database.</p>
+
+<div class="language-sql highlighter-rouge"><pre class="highlight"><code><span class="c1">-- Sample create procedure</span>
+<span class="k">CREATE</span> <span class="k">FUNCTION</span> <span class="n">rateSailor</span> <span class="p">(</span><span class="o">@</span><span class="n">sailorId</span> <span class="n">INT</span><span class="p">)</span>
+<span class="err">   </span><span class="k">RETURNS</span> <span class="n">INT</span>
+<span class="k">AS</span>
+<span class="k">BEGIN</span>
+<span class="err">   </span><span class="k">DECLARE</span> <span class="o">@</span><span class="n">numRes</span> <span class="n">INT</span>
+   <span class="k">DECLARE</span> <span class="o">@</span><span class="n">rating</span> <span class="n">INT</span>
+	<span class="k">SET</span> <span class="o">@</span><span class="n">numRes</span> <span class="o">=</span> <span class="p">(</span><span class="k">SELECT</span> <span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span>
+<span class="err">                           </span><span class="k">FROM</span> <span class="n">Reserves</span> <span class="n">R</span>
+<span class="err">                       </span><span class="k">WHERE</span> <span class="n">R</span><span class="p">.</span><span class="n">sid</span> <span class="o">=</span> <span class="o">@</span><span class="n">sailorId</span><span class="p">)</span>
+<span class="err">   </span><span class="n">IF</span> <span class="o">@</span><span class="n">numRes</span> <span class="o">&gt;</span> <span class="mi">10</span> 
+<span class="err">       </span><span class="k">SET</span> <span class="o">@</span><span class="n">rating</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="err">   </span><span class="k">ELSE</span>
+<span class="err">       </span><span class="k">SET</span> <span class="o">@</span><span class="n">rating</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="err">   </span><span class="k">RETURN</span> <span class="o">@</span><span class="n">rating</span>
+<span class="k">END</span>
+<span class="k">GO</span><span class="p">;</span>
+<span class="k">SELECT</span> <span class="n">dbo</span><span class="p">.</span><span class="n">rateSailor</span><span class="p">(</span><span class="mi">22</span><span class="p">);</span> <span class="k">go</span>
+
+<span class="c1">-- Can call a function</span>
+<span class="k">EXEC</span> <span class="k">SQL</span> <span class="k">CALL</span> <span class="n">functionName</span><span class="p">(</span><span class="o">@</span><span class="n">sid</span><span class="p">,</span> <span class="o">@</span><span class="n">rating</span><span class="p">)</span> 
+</code></pre>
+</div>
+
+<h3 id="advantage-of-stored-procedure">Advantage of Stored Procedure</h3>
+<ul>
+  <li>encapsulates application logic while staying close to the data.</li>
+  <li>different users can run the same logic</li>
+  <li>does not need cursor</li>
+  <li>provides data security</li>
+</ul>
+
+<h3 id="internet-app">Internet App.</h3>
+<p>3 tier architecture , each tier can be independently maintained.</p>
+<ul>
+  <li>Presentation Layer -&gt; HTML, CSS, Javascript, adapt to different display devices</li>
+  <li>Middle Tier -&gt; CGI , application server, (not emphasis in course)</li>
+  <li>Database -&gt; DB2, SQL Server</li>
+</ul>
+
+<h4 id="thin-client-and-thick-client-work-division">Thin Client and Thick Client Work Division</h4>
+<h5 id="thin-client">thin client</h5>
+<p>only does graphic user interface. the business logic, data management depends on the server</p>
+
+<h5 id="thick-client">thick client.</h5>
+<p>implements both graphic and business logic. while server implements data management</p>
+
+<p>Downside -&gt; server has to trust client, has scalability issue. hard to update all clients.</p>
+
+<h3 id="http-hypertext-transfer-protocol">HTTP Hypertext Transfer Protocol</h3>
+<ol>
+  <li>client(browser) sends HTTP request to server</li>
+  <li>server receives request and replies</li>
+  <li>
+    <p>Client receives reply, makes new request</p>
+
+    <p>GET ~/index.html HTTP/1.1 – Request Line
+ User-agent: Mozilla/4.0   – Type of client
+ Accept: text/html, image/gif, image/jpeg</p>
+  </li>
+</ol>
+
+<p>HTTP is stateless, every message is self contained. fires and forget. the advantage of this is don’t need memory management. good for static information</p>
+
+<p>Disadvantage is, no shopping baskets, user logins, dynamic content, and security is harder to implement.</p>
+
+<h4 id="maintaing-state-client-state-or-server-side-state">Maintaing State, Client state or Server Side State</h4>
+<ol>
+  <li>Server Side
+    <ul>
+      <li>Maintains data in a database, but requires database access to query or update.</li>
+      <li>Or stays in the application layer local memory.</li>
+      <li>this is used to persist old customer orders, click trails, user’s movement etc.</li>
+    </ul>
+  </li>
+  <li>Client Side
+    <ul>
+      <li>stores in cookies, the cookie is passed with every HTTP request. is a collection of (Name, Value) pair</li>
+      <li>use cookies to store current user information, current shopping basket, non permanent choices</li>
+    </ul>
+  </li>
+</ol>
+
+<p>In a typical website:</p>
+
+<ul>
+  <li>User logins are kept in cookies</li>
+  <li>User shopping basket kept in another cookie</li>
+  <li>User purchased information and credit card info are kept in server database.</li>
+  <li>Uer click streams are kept in a log on the web sever.</li>
+</ul>
+
+<h4 id="http-response">HTTP Response</h4>
+<ol>
+  <li>200 OK Request Success</li>
+  <li>400 Bad Request, request could not be fulfilled</li>
+  <li>404 Not Found,  does not exists</li>
+  <li>505 HTTP Version Not Supported</li>
+</ol>
+
+<h3 id="html-forms">HTML Forms</h3>
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;FORM ACTION=“page.jsp” METHOD=“GET”
+		NAME=“LoginForm”&gt;
+…
+&lt;/FORM&gt;
+</code></pre>
+</div>
+
+<p>in the above, Action is the specific URI that handles the content 
+Method -&gt; HTTP GET or POST method
+NAME -&gt; name of the form.</p>
+
+<h3 id="javascript">Javascript</h3>
+<p>adds functionality to the presentation tier.</p>
+
+<h3 id="semi-structured-data-and-xml">Semi Structured Data and XML</h3>
+<p>XML is designed for used by applications, and work across different applications. it uses a digraph to handle the database. the leaf nodes represent the attribute data of some atomic type, while interior nodes represent complex objects.</p>
+
+<p>XML is ordered, S.S.D is not</p>
+
+<p>XML can mix text and element, has attributes, entities, processing instruction, comments, SSD does not.</p>
+
+<p>Labels indicate the relationship between two nodes.</p>
+
+<p>the graph does not need to be a tree structure, but is usualy acyclic.</p>
+
+<p>Object Exchange Model (OEM)
+-separates complex object by building them from atomic object</p>
+
+<h4 id="xml-syntax">XML Syntax</h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;BOOK genre= 'Science' format = 'Hardcover'&gt;..data...&lt;/BOOK&gt;
+</code></pre>
+</div>
+
+<p>BOOK is the tag element , genre is the attribute, ‘science’ is attribute value</p>
+
+<p>there can be zero or more attribute to every element.
+<img src="http://localhost:4000/images/XMLTree.jpeg" alt="XML Tree" /></p>
+
+<h4 id="xml-vs-relational-databases">XML VS Relational Databases</h4>
+
+<p><em>Structure</em> RD uses table, XML is tree/ hiearchal graph
+<em>Schema</em> RD has fixed schema, XML is flexible, self describing
+<em>Queries</em> RD has SQL, XML has XPath, which is more complicated. 
+<em>Ordering</em> RD has no order, XML order is implied
+<em>Implementation</em> RD has native implementation, XML is add on.</p>
+
+<h3 id="xpath">XPath</h3>
+<p>is a query language for describing XML, uses tags to traverse through XML tree , and return series of qualifying items.</p>
+
+<div class="language-xml highlighter-rouge"><pre class="highlight"><code>path expression starts with '/'
+/tag1/tag2 return 
+this returns the set of tags that has /tag1/tag2 
+
+attributes - use @id to filter by tag id 
+<span class="nt">&lt;bib&gt;</span>
+<span class="nt">&lt;book</span> <span class="na">bookID =</span> <span class="s">'b100'</span><span class="nt">&gt;&lt;/book&gt;</span>
+<span class="nt">&lt;/bib&gt;</span>
+
+/bib/book/@bookID 
+returns sequence 'b100'...
+
+/bib/*[publisher = 'McGraw']
+returns tags that have values Mcgraw
+
+use * to indicate wildcard
+// is for descendants. 
+
+
+note, /bib/*/title and /bib//title is the same 
+
+/bib/*[publisher = 'McGraw']
+/bib/book[2]/author[1] second paper, first author. 
+/bib/(paper | book) find title of each element that is a paper or a book. 
+</code></pre>
+</div>
+
 
 
       </section>
