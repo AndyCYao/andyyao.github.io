@@ -9,6 +9,18 @@ semester: "Winter 2017"
 ## CMPT 371 Computer Networking Winter 2017
 
 ### Network Layer 
+This layer talks about the specific details of "forwarding" datagrams from one host to another host. and "routing", which is the network wide route taken to go from one point to another.  
+
+#### Forwarding Table and Datagram Network 
+In a datagram Network (as oppose to virtual ciruit), each packet is pass through series of router, each router uses the packet's destination address to determine its next output link interface. Each router has a forwarding table like below,
+
+Destination Address Range | Link Interface
+Prefix matches 			  | 
+1						  | 0
+10					      | 1
+111 					  | 2 
+otherwise				  | 3
+
 #### What's inside a router
 A router has four components
 -Input Port
@@ -33,6 +45,22 @@ Highway - Input Port / Output Port
 #### Switching Techniques within the Switching Fabric
 -Switching Via Memory
 
+behaves like traditional I/O device in operation system. The incoming packet arrives at the processor, the processor copies the packet into its memory. dissects the header for outbound information. then copies the packet into the correct output ports buffer. Two packets canot be forwarded at the same time, *only one memory read write over the shared system bus.* 
+
+-Switching Via Bus
+
+in this type of switch, the incoming packet gets appended with a internal header, the packet then gets sent to *all* the output port without the intervention of the processor. But only the output port that matches whats on the internal header file will process the packet. the internal header label is removed upon switching. 
+Note, there is one single bus. so packets have to wait one at a time for its turn. 
+
+-Switching Via Interconnection (CrossBar)
+
+This arrangement connects N input port with N output ports. This switch allows simultaneous forwarding of multiple packets. *Note, if two packets from two diff. input wants to go to the same output port, one would have to go after the other, since only one packet can be sent over any given bus at a time* 
+
+#### Where does queuing occur 
+Queuing of the packet can occur at both the input port and output port (before and after the roundable). It depends on the current traffic, the relative speed of the switching fabric, etc. Packet loss occurs when the queue gets too large and theres memory overflow. 
+
+### Maximum Transmission Unit and Datagram
+each link has a MTU, the sending host has to stamp the datagram with an ID, break the datagram into chunks that fit the MTU. (with the appropriate space for header size). Remember the offset (which is the start of the next fragment and divided by 8 byte). 
 
 ### Link Layer (Level 2)
 This layer deals with how datagrams are encapsulated in this level (call framing)

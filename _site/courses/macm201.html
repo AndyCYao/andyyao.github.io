@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>Welcome to Andy's homepage! by AndyCYao</title>
 
-    <link rel="stylesheet" href="/blog/assets/css/style.css?v=0ff931024546dafcb33555ab45d5739455487b33">
+    <link rel="stylesheet" href="/blog/assets/css/style.css?v=72ba577423ac433f2690baa3ba0af1044a3698a4">
     <meta name="viewport" content="width=device-width">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -135,6 +135,39 @@ $$ a_n = a_n^h + a_n^p = Ar_1^n + Br_2^n + C2^n + Dn^2(3^n) $$</li>
 
 <p><em>Corollary</em> <script type="math/tex">G=(V,E)</script> be a connected graph or multigraph. G has an Eulerian Trail <em>IFF</em> G has exactly two vertices of odd degree.</p>
 
+<h3 id="hamilton-path-and-hamilton-cycle">Hamilton Path and Hamilton Cycle</h3>
+<p>This is a path/cycle (so no repeat vertice) that traverses all the vertices exactly once in the graph.</p>
+
+<p>finding a hamilton path is NP complete, meaning there is no known algorithm that can find the solution in an appropriate amount of time.</p>
+
+<h5 id="necessary-and-sufficient-condition">Necessary and Sufficient Condition</h5>
+<ul>
+  <li><em>Sufficient</em> if p is true then q is true.</li>
+  <li><em>Necessary</em> if q is true, then p is true. as in, 
+  example, if p is necessary for q, then q cannot be true unless p is true</li>
+  <li>
+    <p><em>Necessary and Sufficient</em> p is true IFF q is true. Acing the test is <em>necessary</em> and <em>sufficient</em> for getting 100% on a test.</p>
+  </li>
+  <li>
+    <p><em>Necessary But Not Sufficient</em> Steering well is <em>necessary</em> for driving well, but <em>not sufficient</em> , because you need to follow traffic rules, not hit pedestrians, etc.</p>
+  </li>
+  <li><em>Sufficient But not Necessary</em> Boiling a potato is <em>sufficient</em> for cooking a potato, but not <em>necessary</em>, because its not the only way to cook, you could fry, roast, etc.</li>
+</ul>
+
+<h4 id="sufficient-condition-1-for-identifying-hamilton-path--cycle">Sufficient Condition 1 for Identifying Hamilton Path / Cycle</h4>
+<p>/<script type="math/tex">for all vertices x, y/, with |V| >=2 x != y /, deg(x) + deg(y) >= n-1</script> 
+and
+/<script type="math/tex">for all vertices x, y/, with |V| >=3 x != y /, deg(x) + deg(y) >= n</script></p>
+
+<p>This is a sufficient condition for a graph to admit a Hamilton cycle.</p>
+
+<h4 id="sufficient-condition-2-for-identifying-hamilton-path--cycle">Sufficient Condition 2 for Identifying Hamilton Path / Cycle</h4>
+<p>/<script type="math/tex">for all vertices x /, deg(x) >= (n-1)/2</script> 
+This is another sufficient condition for having a HP</p>
+
+<h4 id="necessary-condition-for-identifying-hamilton-cycle-in-bipartite-graph">Necessary Condition for Identifying Hamilton <em>Cycle</em> in Bipartite Graph</h4>
+<p>given a bipartite graph organize by set V1 and set V2 . There needs to be |V1| = |v2| for there to be a hamilton cycle</p>
+
 <h3 id="theorem----if-gv-e-is-an-undirected-graph-or-multi-graph--then-sum-of-all-the-degrees-of-the-vertices-are-2e">Theorem -  If G=(V, E) is an undirected graph or multi graph , then sum of all the degrees of the vertices are 2|E|</h3>
 
 <p>Proof - 
@@ -197,6 +230,7 @@ which are different variations of planar graph</p>
 <p>The distance between two vertices is the <em>shortest path</em> between the two</p>
 <h4 id="hamming-distance">Hamming Distance</h4>
 <p>two binary sequence w, and w’ of length n, the hamming distance is the number of positions in the string where they are different.</p>
+
 <h2 id="graph-proofs">Graph Proofs</h2>
 
 <h3 id="proof-for-all-x---y-walks-in-a-graph-there-exists-a-x--y-path">Proof for all x - y walks in a graph, there exists a x -y path</h3>

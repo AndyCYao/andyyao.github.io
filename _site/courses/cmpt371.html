@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>Welcome to Andy's homepage! by AndyCYao</title>
 
-    <link rel="stylesheet" href="/blog/assets/css/style.css?v=0ff931024546dafcb33555ab45d5739455487b33">
+    <link rel="stylesheet" href="/blog/assets/css/style.css?v=72ba577423ac433f2690baa3ba0af1044a3698a4">
     <meta name="viewport" content="width=device-width">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -44,6 +44,45 @@
       
       <h2 id="cmpt-371-computer-networking-winter-2017">CMPT 371 Computer Networking Winter 2017</h2>
 
+<h3 id="network-layer">Network Layer</h3>
+<h4 id="whats-inside-a-router">What’s inside a router</h4>
+<p>A router has four components
+-Input Port
+Handles the transferring of data from the incoming physicial link at the router.
+Uses the forwarding table to determine the packet’s direction in the switching fabric.
+-Switching Fabric 
+connects the input port to the output port. behaves like a network inside a router.
+-Output Port
+Receives the packets from the switching fabric, and transmit them to the outgoing link
+-Routing Processor
+Handles the routing protocol, maintains te routing table and link state information</p>
+
+<h4 id="analogy">Analogy</h4>
+<p>Car coming from a highway enters a ‘roundabout’ that connects to different highway ramp.
+there is an attendant who the driver asks for direction, once given the direction, the driver enteres the roundable and continues on his way.</p>
+
+<p>Car - Packet
+Attendant - Routing Processor
+Roundabout - Switching Fabric
+Highway - Input Port / Output Port</p>
+
+<h4 id="switching-techniques-within-the-switching-fabric">Switching Techniques within the Switching Fabric</h4>
+<p>-Switching Via Memory</p>
+
+<p>behaves like traditional I/O device in operation system. The incoming packet arrives at the processor, the processor copies the packet into its memory. dissects the header for outbound information. then copies the packet into the correct output ports buffer. Two packets canot be forwarded at the same time, <em>only one memory read write over the shared system bus.</em></p>
+
+<p>-Switching Via Bus</p>
+
+<p>in this type of switch, the incoming packet gets appended with a internal header, the packet then gets sent to <em>all</em> the output port without the intervention of the processor. But only the output port that matches whats on the internal header file will process the packet. the internal header label is removed upon switching. 
+Note, there is one single bus. so packets have to wait one at a time for its turn.</p>
+
+<p>-Switching Via Interconnection (CrossBar)</p>
+
+<p>This arrangement connects N input port with N output ports. This switch allows simultaneous forwarding of multiple packets. <em>Note, if two packets from two diff. input wants to go to the same output port, one would have to go after the other, since only one packet can be sent over any given bus at a time</em></p>
+
+<h4 id="where-does-queuing-occur">Where does queuing occur</h4>
+<p>Queuing of the packet can occur at both the input port and output port (before and after the roundable). It depends on the current traffic, the relative speed of the switching fabric, etc. Packet loss occurs when the queue gets too large and theres memory overflow.</p>
+
 <h3 id="link-layer-level-2">Link Layer (Level 2)</h3>
 <p>This layer deals with how datagrams are encapsulated in this level (call framing)</p>
 
@@ -56,7 +95,7 @@
 
 <p>Link layer is implemented at the network adapter level, so hardware stuff.</p>
 
-<h3 id="analogy">Analogy</h3>
+<h4 id="analogy-1">Analogy</h4>
 <p>Travel Agent plans a tourist to travel from City A to City B. In which the tourist takes a car, an airplane, then a train.</p>
 
 <p>Tourist - Datagram
