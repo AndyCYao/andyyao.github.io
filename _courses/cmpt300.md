@@ -8,6 +8,13 @@ semester: "Winter 2017"
 
 ## CMPT 300 Operating Systems Winter 2017
 
+### Bankers Algorithm:
+This is an algorithm that keeps track of allocated resources, total resources, and needed resources. The idea is that process deadlocks can be prevented if operating system ensures it is in a safe state.
+
+Safe State: there exists a sequence of processes that can allow all process to finish. 
+
+Unsafe state: there is not such sequence. 
+
 ### Master Boot Record (MBR)
 The MBR stores the details of the various partitions, their start address, end addresses etc. 
 
