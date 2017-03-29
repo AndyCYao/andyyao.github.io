@@ -421,3 +421,94 @@ note, /bib/*/title and /bib//title is the same
 /bib/(paper | book) find title of each element that is a paper or a book. 
 ~~~
 
+Exam 3 Prep
+
+### File and Access Method
+DBAs need to know how to configure a database for faster queries. 
+Two issues
+
+1. What plans are considered for a given query
+2. Algoirthm to search for the cheapest plan
+3. How is the cost of the plan estimated.
+
+#### System R optimizer
+Is a type of query optimizer, works well for <10 joins. 
+
+~~~sql
+SELECT s.sname
+FROM Reserves R, Sailors S 
+WHERE R.sid = S.sid 
+AND R.bid = 100 AND S.rating > 5
+~~~
+
+the above can be broken in the form of RA expression tree.
+can be broken down in 
+[insert link for _images/RA_ExpressionTree.png]
+
+
+To obtain the evaluation plan, we need to implement each relational algebra operation. for example, a JOIN between Reserve and Sailor is a page oriented simple nested loop. The projection and selection commands are 'on the fly' generated. 
+
+*Key Takeaway - Pushing Selections* since JOIN operations are expensive, it is better to apply selections early, so that the size of the tables been joined is reduced.  
+
+
+### Data On External Storage
+Options include
+
+1. Disks - can retrieve random pages at fixed cost, reading several consecutive pages is much cheaper than reading them in random order.
+
+2. Tapes can read only in sequence
+
+### Alternative File Organization
+Heap - suitable if typical access is file scan retrieving all records
+
+Sorted Files - suitable for retrieve in some order, or only a range of records is needed
+
+Indxes - DS organize record via trees or hashing. 
+
+
+
+
+### Index
+Pro- Are optional structure associated with a table which may improve the performance of a query.
+Indices increase the speed of join (because foreign keys can be indexed too)
+
+primary vs. secondary - search key contains primary key, then called primary index.
+
+
+Con- Indices needs to be updated everytime there is an update. 
+
+- Clustered Index (Alternative 1) Data Entry = Data Record
+
+the data and the index is together, think phone book, which is organized by ascending phone numbers, usually the primary key of a table is in clustered
+
+we can only have *one* clusterd index, b/c the table cannot be sorted by multiple columns. 
+
+
+- Non-Clustered Index. (Alternative 2 and Alternative 3)
+
+this means data is not where the record is. think textbook, with a index at the back. The two are separate,  the index record  *points* to the data entry, relevant section in the textbook. 
+
+we can have multiple non clustered indices, since they are separated objects. 
+
+data entries are much smaller than data records.so better than alternative 1.
+
+While alternative 3 is more compact than 2, it is variable sized data entries (dont know how long it can get, if the search key is common occurence.)
+
+~~~sql
+--Alternative 2 looks like 
+color, location
+red, 1
+red, 3
+red, 2
+blue,6
+blue, 4
+blue, 5
+
+--Alternative 3 looks like
+red 1,2,3
+blue 4,5,6
+~~~
+
+#### Hash Base Index
+
+#### B Tree Index
