@@ -85,8 +85,12 @@ Travel Agent - Routing Protocol.
 
 
 #### Broadcast Channel
-BC contains multiple hosts like wireless LAN, satellite network, hybrid fiber coaxial cable. 
-This needs a specific protocol call *medium access protocool*. 
+BC contains multiple hosts like wireless LAN, satellite network, hybrid fiber coaxial cable. (think cocktail party, one person speaks at a time and the group listens.) 
+This needs a specific protocol call *multiple access protocool* to decide who's turn is it to speak.
+
+In general, the protocol has the following idea
+1. if there is one node that wish to send data, then it has a throughput of R bps
+2. if there are m nodes that wish to send, then the throughput is R/m bps. 
 
 #### Point To Point Communication Link
 Found between two routers connected by long distance link, or between user's computer and nearby ethernet. this uses *point to point protocol*
