@@ -33,7 +33,7 @@ The applications they chose to test are from two groups,
 1.) those that did not scale well on Linux (memcached, apache, metis, a MapReduce Library)
 2.) those designed for parallel execution and are kernel intensive (gmake, postgresSQL, Exim, Psearchy)
 
-The authors artifically made the work intense on the kernel, especially on the kernel components (netwwork stack, file name cache, page cache, etc. )
+The authors artifically made the work intense on the kernel, especially on the kernel components (network stack, file name cache, page cache, etc. )
 
 # Kernel Optimzations
 ## Scalability Tutorial
