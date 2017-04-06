@@ -12,6 +12,7 @@ categories: SFU
 - hypervisor or Virtual machine monitor is a software, firmware, or hardware that runs virtual machines. 
 - trap and emulate virtualization - when an OS is running as a virtual machine, some of its instruction may conflict with the host operation system. so the 'hypervisor' emulates the effect of the specific instruction or action without carrying it out. 
 
+-*MMU* algorithm.
 
 ### Introduction
 In 2006 AMD and Intel introduced hardware VMM, but this paper find it is actually not as good as before, which was software assisted VMM (that does binary translation). The author believes it is due to high VMM / Guest transition cost and rigid programming model. 
@@ -44,3 +45,13 @@ Uses a interpreter to separate virtual state from physicial state. this prevents
 The authors experimented running a forkwait() process on native execution, software VMM, and hardware VMM. 
 
 They found the host took 6 seconds, the software VMM took 36.9 seconds, and hardware VMM took 106.4 seconds. 
+
+### Conclusion
+
+At the time of writing, hardware VMM does not perform as well as software VMM in some fields. While hardware and software VMM does well in compute-bound workloads, software VMM does better in process, IO Performance, switching context. 
+
+hardware VMM removes the need for BT , but introduced different amount of overhead. Currently the hardware support is 'CISC' - like. 
+
+
+
+

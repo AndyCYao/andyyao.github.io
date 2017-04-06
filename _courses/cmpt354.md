@@ -431,26 +431,6 @@ Two issues
 2. Algoirthm to search for the cheapest plan
 3. How is the cost of the plan estimated.
 
-#### System R optimizer
-Is a type of query optimizer, works well for <10 joins. 
-
-~~~sql
-SELECT s.sname
-FROM Reserves R, Sailors S 
-WHERE R.sid = S.sid 
-AND R.bid = 100 AND S.rating > 5
-~~~
-
-the above can be broken in the form of RA expression tree.
-can be broken down in 
-[insert link for _images/RA_ExpressionTree.png]
-
-
-To obtain the evaluation plan, we need to implement each relational algebra operation. for example, a JOIN between Reserve and Sailor is a page oriented simple nested loop. The projection and selection commands are 'on the fly' generated. 
-
-*Key Takeaway - Pushing Selections* since JOIN operations are expensive, it is better to apply selections early, so that the size of the tables been joined is reduced.  
-
-
 ### Data On External Storage
 Options include
 
@@ -458,13 +438,46 @@ Options include
 
 2. Tapes can read only in sequence
 
+### Cost Model for Database operation 
+terminologies:
+B = # of data pages 
+
+R = number of records per page 
+
+D = average time to read and write (this time tends to dominate H, D average is 15 msec, H is 100 nano seconds.) 
+
+C = average time to process a record 
+
+H = time to apply a hash function.
+
 ### Alternative File Organization
-Heap - suitable if typical access is file scan retrieving all records
+Heap - suitable if typical access is file scan retrieving all records (unsorted) 
 
-Sorted Files - suitable for retrieve in some order, or only a range of records is needed
+Need to scan for most operations (costly), insert is fast, just insert at end of file.
 
-Indxes - DS organize record via trees or hashing. 
+Sorted Files - suitable for retrieve in some order, or only a range of records is needed (note can only be sorted by one field)
 
+cost of binary search is $$ log_2{# of disk pages} $$
+
+Index - DS organize record via trees or hashing. 
+
+#### To Find data entry 
+Hash - constant cost for hash index 
+Tree - log(height of the tree)
+
+#### To find records that matches data entries 
+Unclustered index #pages = # matching records 
+
+Clustered Index - # matching pages. 
+
+### Operations
+Scan -> fetch all records in the file , the pages fetch from disk to the buffer pool 
+
+Search With Equality Selection -> 'Find student records for students with ID ' = 23 
+
+Insert -> identify the page in which record must be inserted, fetch that page from disk, modify it to include new record, write back to modified page. 
+
+Delete -> must identify the page that has the record, fetch from disk, modify it, write it back. 
 
 
 
@@ -477,12 +490,14 @@ primary vs. secondary - search key contains primary key, then called primary ind
 
 Con- Indices needs to be updated everytime there is an update. 
 
-- Clustered Index (Alternative 1) Data Entry = Data Record
+- Clustered Index (Alternative 1) Data Entry = Data Record (AKA Covering Index)
 
 the data and the index is together, think phone book, which is organized by ascending phone numbers, usually the primary key of a table is in clustered
 
 we can only have *one* clusterd index, b/c the table cannot be sorted by multiple columns. 
 
+index + sorted file is the best.
+Called clustered index.
 
 - Non-Clustered Index. (Alternative 2 and Alternative 3)
 
@@ -493,6 +508,8 @@ we can have multiple non clustered indices, since they are separated objects.
 data entries are much smaller than data records.so better than alternative 1.
 
 While alternative 3 is more compact than 2, it is variable sized data entries (dont know how long it can get, if the search key is common occurence.)
+
+(to build a clustered index, you would need to sort the heap file and also keep index sorted)
 
 ~~~sql
 --Alternative 2 looks like 
@@ -510,5 +527,61 @@ blue 4,5,6
 ~~~
 
 #### Hash Base Index
+Used for equality search. index is a collection of buckets, and buckets are primary page plus zero or more overflow page. 
+
+If alternative 1 is used, the buckets contain the data record. 
+
+with alternative 2, bucket contains <key,rid> pairs
+
+with alternative 3, bucket contains <key, rid list> pairs
+
+Assumes 80% page ocupancy
 
 #### B Tree Index
+
+leaf pages contain the data enry and *are chained*
+that means they can visit previous and next. 
+
+non-leaf pages contain index entries, they direct searches. 
+ 
+Assumes 67% page occupancy
+
+### Query optimizer (Chap 13 of Database Management System)
+the conjuncts that the index matches as the primary conjuncts in the selection. 
+
+hash index matches a selection condition containing no disjunctions if there is a term of the form *attribute = value * for each attribute in the index search key 
+
+tree index matches a selection condition containing no disjunctions if there is a term of the form attribute *op* value for each attribute in a prefix of the index's search key. 
+
+
+
+#### System R Optimizer
+Is a type of query optimizer, works well for <10 joins. 
+
+key features, 
+
+1. the use of statistics about the database instance to estimate the cost of a query evaluation plan. 
+2. Consider only plans with binary joins which the inner relation is base. 
+5. Model of costs that accounts fo CPU cost as well as I/o Cost 
+
+
+~~~sql
+SELECT s.sname
+FROM Reserves R, Sailors S 
+WHERE R.sid = S.sid 
+AND R.bid = 100 AND S.rating > 5
+~~~
+
+the above can be broken in the form of RA expression tree.
+can be broken down in 
+[insert link for _images/RA_ExpressionTree.png]
+
+
+To obtain the evaluation plan, we need to implement each relational algebra operation. for example, a JOIN between Reserve and Sailor is a page oriented simple nested loop. The projection and selection commands are 'on the fly' generated. 
+
+In a RA expression tree, each internal node are relational algebra operator, and each leaf is a table. 
+
+*Key Takeaway - Pushing Selections* since JOIN operations are expensive, it is better to apply selections early, so that the size of the tables been joined is reduced.  
+
+
+
