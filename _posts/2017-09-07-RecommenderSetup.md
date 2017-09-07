@@ -13,7 +13,7 @@ I want to have a place on my website to host the recommender app. The app is wri
 4. Git Clone the app into here. 
 5. in /var/www/FlaskApps create a .wsgi file with below 
 
-'''python
+~~~python
 #! /usr/bin/python
 import sys
 import logging
@@ -24,11 +24,11 @@ sys.path.insert(0,"/var/www/FlaskApps/Recommender/") # working one
 # home points to the home.py file
 from app import app as application
 application.secret_key = "secretKey"
-'''
+~~~
 
 6. go to /etc/apache2 create a Recommender.conf file with the below 
 
-''' 
+~~~
 <VirtualHost *:80>
     ServerName www.andy-yao.com
     ServerAdmin admin@mywebsite.com
@@ -45,17 +45,17 @@ application.secret_key = "secretKey"
     LogLevel warn
     CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>
-'''
+~~~
 
 7. Enable the site by running
 
-'''
+~~~
 sudo a2ensite Recommender
-'''
+~~~
 
 7. restart apache and reload to see the changes with the below line 
 
-'''
+~~~
 sudo service apache2 reload
 sudo /etc/init.d/apache2 reload
-'''
+~~~
